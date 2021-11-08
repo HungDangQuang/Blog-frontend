@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import * as Yup from 'yup';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useFormik, Form, FormikProvider } from 'formik';
+import React from "react";
+import { connect } from 'react-redux';
+import { userActions } from '../Redux/_actions';
+
+import { Link as RouterLink } from 'react-router-dom';
 
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
@@ -14,95 +15,130 @@ import {
     TextField,
     IconButton,
     InputAdornment,
-    FormControlLabel
+    FormControlLabel,
+    FormGroup,
+    Button
+
 } from '@mui/material';
 
-import { LoadingButton } from '@mui/lab';
+class LoginForm extends React.Component {
+    constructor(props) {
+        super(props);
 
-const LoginForm = () => {
-    const navigate = useNavigate();
-    const [showPassword, setShowPassword] = useState(false);
+        this.state = {
+            email: '',
+            password: '',
+            submitted: false,
+            isShowPwd: false
+        };
+    
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
 
-    const LoginSchema = Yup.object().shape({
-        email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-        password: Yup.string().required('Password is required')
-    });
+        this.handlePassword = this.handlePassword.bind(this);
+    }
 
-    const formik = useFormik({
-    initialValues: {
-        email: '',
-        password: '',
-        remember: true
-    },
-    validationSchema: LoginSchema,
-        onSubmit: () => {
-        navigate('/');
+    handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
+
+    handlePassword() {
+        this.setState(prevState => ({isShowPwd: !prevState.isShowPwd}))
+    }
+    
+    handleSubmit(e) {
+
+        e.preventDefault();
+
+        this.setState({ submitted: true });
+        const { email, password } = this.state;
+        if (email && password) {
+            this.props.login(email,password);
         }
-    });
+    }
 
-    const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
+    render() {
+        const { loggingIn } = this.state;
+        const isShowPwd = this.state.isShowPwd;
+        return(
+                <FormGroup autoComplete="off" noValidate>
+                    <Stack spacing={3}>
+                    <TextField
+                        fullWidth
+                        required
+                        autoComplete="email"
+                        type="email"
+                        label="Email"
+                        name="email"
+                        value={this.state.email}
+                        autoFocus
+                        onChange={this.handleChange}
+                    />
 
-    const handleShowPassword = () => {
-    setShowPassword((show) => !show);
-    };
-    return(
-        <FormikProvider value={formik}>
-            <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-            <Stack spacing={3}>
-            <TextField
-                fullWidth
-                autoComplete="username"
-                type="email"
-                label="Email address"
-                {...getFieldProps('email')}
-                error={Boolean(touched.email && errors.email)}
-                helperText={touched.email && errors.email}
-            />
+                    <TextField
+                        fullWidth
+                        required
+                        label="Password"
+                        name="password"
+                        value={this.state.password}
+                        autoComplete="current-password"
+                        onChange={this.handleChange}
 
-            <TextField
-                fullWidth
-                autoComplete="current-password"
-                type={showPassword ? 'text' : 'password'}
-                label="Password"
-                {...getFieldProps('password')}
-                InputProps={{
-                endAdornment: (
-                    <InputAdornment position="end">
-                        <IconButton onClick={handleShowPassword} edge="end">
-                        <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                        </IconButton>
-                    </InputAdornment>
-                )
-                }}
-                error={Boolean(touched.password && errors.password)}
-                helperText={touched.password && errors.password}
-            />
-            </Stack>
+                        type={isShowPwd ? 'text' : 'password'}
+                        InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton onClick={this.handlePassword} edge="end">
+                                <Icon icon={isShowPwd ? eyeFill : eyeOffFill} />
+                                </IconButton>
+                            </InputAdornment>
+                        )
+                        }}
+                    />
+                    </Stack>
 
-            <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-                <FormControlLabel
-                control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
-                label="Remember me"
-                />
+                    <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+                        <FormControlLabel
+                        control={<Checkbox/>}
+                        label="Remember me"
+                        />
 
-                <Link component={RouterLink} variant="subtitle2" to="#">
-                Forgot password?
-                </Link>
-            </Stack>
+                        <Link component={RouterLink} variant="subtitle2" to="#">
+                        Forgot password?
+                        </Link>
+                    </Stack>
 
-            <LoadingButton
-            fullWidth
-            size="large"
-            type="submit"
-            variant="contained"
-            loading={isSubmitting}
-            >
-                Login
-            </LoadingButton>
-            </Form>
-        </FormikProvider>
-    );
+                    <Button
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+
+                    sx={{
+                        borderRadius: 5
+                    }}   
+                    onClick={this.handleSubmit}
+                    onLoad={loggingIn}
+                    >
+                        Login
+                    </Button>
+                </FormGroup >
+        );
+    }
 }
 
-export default LoginForm;
+
+function mapStateToProps(state) {
+    const { loggingIn } = state.authentication;
+    return { loggingIn };
+}
+
+const actionCreators = {
+    login: userActions.login,
+    logout: userActions.logout
+};
+
+const connectedLoginForm = connect(mapStateToProps, actionCreators)(LoginForm);
+export { connectedLoginForm as LoginForm };
 
