@@ -73,7 +73,6 @@ class LoginForm extends React.Component {
                         type="email"
                         label="Email"
                         name="email"
-                        value={this.state.email}
                         autoFocus
                         onChange={this.handleChange}
                     />
@@ -83,7 +82,6 @@ class LoginForm extends React.Component {
                         required
                         label="Password"
                         name="password"
-                        value={this.state.password}
                         autoComplete="current-password"
                         onChange={this.handleChange}
 
