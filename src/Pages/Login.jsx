@@ -25,7 +25,6 @@ const SectionStyle = styled(Card)(({ theme }) => ({
     width: '100%',
     height: '100vh',
     display: 'flex',
-    // backgroundImage: 'url(https://images.unsplash.com/photo-1635683844800-fe8473ac25c2?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDIxfENEd3V3WEpBYkV3fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60)',
     flexDirection: 'column',
     justifyContent: 'center',
     margin: theme.spacing(0, 0, 0, 0)
@@ -42,7 +41,6 @@ const ContentStyle = styled('div')(({ theme }) => ({
 }));
 
 const ContainerStyled = styled(Container)(({ theme }) => ({
-    // backgroundColor: '',
     minHeight: 369,
     borderRadius: 10,
 }));

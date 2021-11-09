@@ -41,7 +41,6 @@ const ContentStyle = styled('div')(({ theme }) => ({
 }));
 
 const ContainerStyled = styled(Container)(({ theme }) => ({
-    // backgroundColor: '',
     minHeight: 369,
     borderRadius: 10,
 }));
