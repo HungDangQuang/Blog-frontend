@@ -2,7 +2,8 @@ import config from '../config';
 import handleResponse from './handleResponse';
 export const userService = {
     login,
-    logout
+    logout,
+    register
 };
 
 function login(email, password) {
@@ -24,6 +25,16 @@ function login(email, password) {
 function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
+}
+
+function register(user) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+    };
+
+    return fetch(`${config.apiUrl}/register`, requestOptions).then(handleResponse);
 }
 
 
