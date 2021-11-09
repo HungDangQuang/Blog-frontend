@@ -2,8 +2,6 @@ import React from "react";
 import { connect } from 'react-redux';
 import { userActions } from '../../../Redux/_actions';
 
-import { Link as RouterLink } from 'react-router-dom';
-
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';

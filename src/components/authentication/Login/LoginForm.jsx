@@ -104,7 +104,7 @@ class LoginForm extends React.Component {
                         label="Remember me"
                         />
 
-                        <Link component={RouterLink} variant="subtitle2" to="#">
+                        <Link component={RouterLink} variant="subtitle2" to="/register">
                         Forgot password?
                         </Link>
                     </Stack>

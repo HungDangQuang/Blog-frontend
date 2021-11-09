@@ -78,7 +78,7 @@ class Login extends React.Component {
     
                     <Typography variant="body2" align="center" sx={{ mt: 3 }}>
                     Don’t have an account?&nbsp;
-                    <Link variant="subtitle2" component={RouterLink} to="register">
+                    <Link variant="subtitle2" component={RouterLink} to="/register">
                         Sign Up
                     </Link>
                     </Typography>
