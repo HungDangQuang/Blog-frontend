@@ -1,6 +1,6 @@
 import { userConstants } from '../_constants';
-import { alertActions } from '.';
-import { userService } from '../../../../../src/_services/user.sevices';
+import { alertActions } from './alert.actions';
+import { userService } from '../../_services/user.sevices';
 import { history } from '../_helpers';
 
 export const userActions = {
@@ -21,7 +21,7 @@ function login(email, password) {
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alertActions.error('Username or password is incorrect'));
                 }
             );
     };

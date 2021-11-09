@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { userActions } from '../Redux/_actions';
+import { userActions } from '../../../Redux/_actions';
 
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -31,6 +31,8 @@ class LoginForm extends React.Component {
             submitted: false,
             isShowPwd: false
         };
+         // reset login status
+        this.props.logout();
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);

@@ -1,3 +1,4 @@
+import React from "react";
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
@@ -5,6 +6,9 @@ import { Card, Stack, Link, Container, Typography } from '@mui/material';
 
 // components
 import { LoginForm } from '../components/authentication/Login/LoginForm';
+import { connect } from 'react-redux';
+import { alertActions } from '../Redux/_actions';
+import { history } from '../Redux/_helpers';
 
 
 
@@ -21,7 +25,7 @@ const SectionStyle = styled(Card)(({ theme }) => ({
     width: '100%',
     height: '100vh',
     display: 'flex',
-    backgroundImage: 'url(https://images.unsplash.com/photo-1635519335547-3caa661c8c77?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MjR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=800&q=60)',
+    // backgroundImage: 'url(https://images.unsplash.com/photo-1635683844800-fe8473ac25c2?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDIxfENEd3V3WEpBYkV3fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60)',
     flexDirection: 'column',
     justifyContent: 'center',
     margin: theme.spacing(0, 0, 0, 0)
@@ -38,38 +42,65 @@ const ContentStyle = styled('div')(({ theme }) => ({
 }));
 
 const ContainerStyled = styled(Container)(({ theme }) => ({
-    backgroundColor: 'white',
+    // backgroundColor: '',
     minHeight: 369,
-    position: 'relative',
     borderRadius: 10,
 }));
 
 // ----------------------------------------------------------------------
 
-export default function Login() {
-    return (
-        <>
-        <SectionStyle>
-        <ContainerStyled maxWidth="xs">
-            <ContentStyle>
-                
-            <Stack sx={{ mb: 3 }}>
-                <TitleStyle variant="h4" align="center" gutterBottom>
-                Search Blog
-                </TitleStyle>
-            </Stack>
+class Login extends React.Component {
+    constructor(props){
+        super(props);
 
-            <LoginForm />
+        history.listen((location, action) => {
+            // clear alert on location change
+            this.props.clearAlerts();
+        });
 
-                <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-                Don’t have an account?&nbsp;
-                <Link variant="subtitle2" component={RouterLink} to="register">
-                    Sign Up
-                </Link>
-                </Typography>
-            </ContentStyle>
-        </ContainerStyled>
-        </SectionStyle>
-        </>
-    );
+    }
+
+    render() {
+        const { alert } = this.props;
+        return (
+            <>
+            <SectionStyle>
+            <ContainerStyled maxWidth="xs">
+                    {alert.message &&
+                        <div className={`alert ${alert.type}`}>{alert.message}</div>
+                    }
+                <ContentStyle>
+                <Stack sx={{ mb: 3 }}>
+                    <TitleStyle variant="h4" align="center" gutterBottom>
+                    Search Blog
+                    </TitleStyle>
+                </Stack>
+    
+                <LoginForm />
+    
+                    <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+                    Don’t have an account?&nbsp;
+                    <Link variant="subtitle2" component={RouterLink} to="register">
+                        Sign Up
+                    </Link>
+                    </Typography>
+                </ContentStyle>
+            </ContainerStyled>
+            </SectionStyle>
+            </>
+        );
+    }
 }
+
+
+function mapStateToProps(state) {
+    const { alert } = state;
+    return { alert };
+}
+
+const actionCreators = {
+    clearAlerts: alertActions.clear
+};
+
+const connectedApp = connect(mapStateToProps, actionCreators)(Login);
+export { connectedApp as Login };
