@@ -2,13 +2,12 @@ import React from "react";
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
-import { Card, Stack, Link, Container, Typography } from '@mui/material';
+import { Card, Link, Container, Typography } from '@mui/material';
 
 // components
-import { LoginForm } from '../components/authentication/Login/LoginForm';
-import { connect } from 'react-redux';
-import { alertActions } from '../Redux/_actions';
-import { history } from '../Redux/_helpers';
+import { HandleLogin } from '../containers/HandleLogin'
+
+
 
 
 
@@ -31,7 +30,7 @@ const SectionStyle = styled(Card)(({ theme }) => ({
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
-    maxWidth: 350,
+    maxWidth: 330,
     margin: 'auto',
     display: 'flex',
     minHeight: '70vh',
@@ -47,58 +46,31 @@ const ContainerStyled = styled(Container)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-class Login extends React.Component {
-    constructor(props){
-        super(props);
+const Login = () => {
+    return (
+        <>
+        <SectionStyle>
+        <ContainerStyled maxWidth="xs">
+                {/* {alert.message &&
+                    <div className={`alert ${alert.type}`}>{alert.message}</div>
+                } */}
+            <ContentStyle>
+                <TitleStyle variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
+                Search Blog
+                </TitleStyle>
+                <HandleLogin />
 
-        history.listen((location, action) => {
-            // clear alert on location change
-            this.props.clearAlerts();
-        });
-
-    }
-
-    render() {
-        const { alert } = this.props;
-        return (
-            <>
-            <SectionStyle>
-            <ContainerStyled maxWidth="xs">
-                    {alert.message &&
-                        <div className={`alert ${alert.type}`}>{alert.message}</div>
-                    }
-                <ContentStyle>
-                <Stack sx={{ mb: 3 }}>
-                    <TitleStyle variant="h4" align="center" gutterBottom>
-                    Search Blog
-                    </TitleStyle>
-                </Stack>
-    
-                <LoginForm />
-    
-                    <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-                    Don’t have an account?&nbsp;
-                    <Link variant="subtitle2" component={RouterLink} to="/register">
-                        Sign Up
-                    </Link>
-                    </Typography>
-                </ContentStyle>
-            </ContainerStyled>
-            </SectionStyle>
-            </>
-        );
-    }
-}
-
-
-function mapStateToProps(state) {
-    const { alert } = state;
-    return { alert };
-}
-
-const actionCreators = {
-    clearAlerts: alertActions.clear
+                <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+                Don’t have an account?&nbsp;
+                <Link variant="subtitle2" component={RouterLink} to="/register">
+                    Sign Up
+                </Link>
+                </Typography>
+            </ContentStyle>
+        </ContainerStyled>
+        </SectionStyle>
+        </>
+    )
 };
 
-const connectedApp = connect(mapStateToProps, actionCreators)(Login);
-export { connectedApp as Login };
+export default Login;
