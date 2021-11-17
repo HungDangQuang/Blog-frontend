@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { userActions } from '../../../Redux/_actions';
-
-import { Link as RouterLink } from 'react-router-dom';
+import { userActions } from '../../../redux/_actions';
 
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
@@ -23,9 +21,11 @@ class RegisterForm extends React.Component {
         super(props);
 
         this.state = {
-            username:'',
-            email: '',
-            password: '',
+            user: {
+                username:'',
+                password: '',
+                email: ''
+            },
             submitted: false,
             isShowPwd: false
         };
@@ -68,6 +68,7 @@ class RegisterForm extends React.Component {
                     <Stack spacing={3} sx={{mb: 4}}>
                     <TextField
                         fullWidth
+                        size="small"
                         required
                         autoComplete="username"
                         type="username"
@@ -79,6 +80,7 @@ class RegisterForm extends React.Component {
 
                     <TextField
                         fullWidth
+                        size="small"
                         required
                         autoComplete="email"
                         type="email"
@@ -89,6 +91,7 @@ class RegisterForm extends React.Component {
 
                     <TextField
                         fullWidth
+                        size="small"
                         required
                         label="Password"
                         name="password"
@@ -110,16 +113,16 @@ class RegisterForm extends React.Component {
 
                     <Button
                     fullWidth
-                    size="large"
+                    size="medium"
                     type="submit"
                     variant="contained"
 
                     sx={{
-                        borderRadius: 5
+                        borderRadius: 3
                     }}   
                     onClick={this.handleSubmit}
                     >
-                        Login
+                        Sign Up
                     </Button>
                 </FormGroup >
         );
@@ -136,5 +139,5 @@ const actionCreators = {
     register: userActions.register
 };
 
-const connectedLoginForm = connect(mapStateToProps, actionCreators)(RegisterForm);
-export { connectedLoginForm as RegisterForm };
+const connectedRegisterForm = connect(mapStateToProps, actionCreators)(RegisterForm);
+export { connectedRegisterForm as RegisterForm };
