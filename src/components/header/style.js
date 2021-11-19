@@ -1,8 +1,8 @@
-const styleNavigation = {
+const styleHeader = {
   root: {
-    position: "static",
-    // background: "#2E3B55",
-    height: "200px",
+    width: "100%",
+    height: "50px",
+    background: "#000000",
   },
   navbar: {
     margin: "0 30px",
@@ -24,4 +24,4 @@ const styleNavigation = {
   },
 };
 
-export default styleNavigation;
+export default styleHeader;
