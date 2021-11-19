@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   },
   container: {
     margin: "0 10px",
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
   },
 });
 
