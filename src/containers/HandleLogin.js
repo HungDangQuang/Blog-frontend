@@ -21,6 +21,9 @@ const HandleLogin = () => {
         type: "success",
       };
       dispatch(setMessage(payloadSuccess));
+      setTimeout(() => {
+        window.location.href = "/home";
+      }, 1000);
     } else {
       dispatch(setMessage(apiResponse));
     }
