@@ -1,18 +1,18 @@
 import { Grid } from "@material-ui/core";
-import { Box } from "@mui/material";
 //components
 import Categories from "../components/blog/Category.jsx";
-// import Posts from "../components/blog/Posts";
-import Post from "../components/blog/Post";
+import Posts from "../components/blog/Posts";
 
 const Blog = () => {
   return (
-    <Box style={{ border: "1px solid #ccc" }}>
-      <Box style={{ display: "flex", marginTop: "100px" }}>
-        <Post />
+    <Grid container>
+      <Grid container item xs={12} sm={10} lg={30}>
+        <Posts />
+      </Grid>
+      <Grid item lg={2} xs={100} sm={2}>
         <Categories />
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 };
 

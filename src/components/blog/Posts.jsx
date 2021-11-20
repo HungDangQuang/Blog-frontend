@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Grid, Box } from "@material-ui/core";
 import { Link, useLocation } from "react-router-dom";
-
+import { getAllPosts } from "../../apis/productApi";
 //components
-import Post from "./Post";
+import Card from "../card/Index";
 
 const Posts = () => {
   const [posts, getPosts] = useState([]);
@@ -11,7 +11,7 @@ const Posts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let data = await []; // params in url
+      let data = await getAllPosts(search); // params in url
       getPosts(data);
     };
     fetchData();
@@ -21,14 +21,15 @@ const Posts = () => {
     <>
       {posts.length ? (
         posts.map((post) => (
-          <Grid item lg={3} sm={4} xs={12}>
-            <Link style={{ textDecoration: "none", color: "inherit" }} to={`#`}>
-              <Post post={post} />
-            </Link>
-          </Grid>
+          <Link
+            style={{ textDecoration: "none", color: "inherit" }}
+            to={`details/${post._id}`}
+          >
+            <Card post={post} />
+          </Link>
         ))
       ) : (
-        <Box style={{ color: "878787", margin: "30px 100px", fontSize: 18 }}>
+        <Box style={{ color: "878787", margin: "30px 80px", fontSize: 18 }}>
           No data is available for selected category
         </Box>
       )}
