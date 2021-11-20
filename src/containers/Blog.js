@@ -1,26 +1,18 @@
 import { Grid } from "@material-ui/core";
-
+import { Box } from "@mui/material";
 //components
-import Banner from "../components/banner/Index.jsx";
 import Categories from "../components/blog/Category.jsx";
 // import Posts from "../components/blog/Posts";
 import Post from "../components/blog/Post";
-import Navigation from "../components/navigation/Index.jsx";
 
 const Blog = () => {
   return (
-    <>
-      <Navigation />
-      <Banner />
-      <Grid container>
-        <Grid container item xs={12} sm={10} lg={10}>
-          <Post />
-        </Grid>
-        <Grid item lg={2} xs={12} sm={2}>
-          <Categories />
-        </Grid>
-      </Grid>
-    </>
+    <Box style={{ border: "1px solid #ccc" }}>
+      <Box style={{ display: "flex", marginTop: "100px" }}>
+        <Post />
+        <Categories />
+      </Box>
+    </Box>
   );
 };
 

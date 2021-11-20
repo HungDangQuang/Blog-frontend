@@ -1,8 +1,8 @@
 const styleHeader = {
   root: {
     width: "100%",
-    height: "50px",
-    background: "#000000",
+    height: "58px",
+    background: "#04CCCC",
   },
   navbar: {
     margin: "0 30px",
@@ -12,12 +12,6 @@ const styleHeader = {
   navi: {
     color: "#ccc",
     padding: "5px",
-  },
-
-  logo: {
-    // border: "1px solid #ccc",
-    width: "100%",
-    height: "130px",
   },
   search: {
     float: "left",

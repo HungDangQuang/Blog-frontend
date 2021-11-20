@@ -24,17 +24,6 @@ const Header = () => {
           </Box>
         </Toolbar>
       </Box>
-
-      <Box className={classes.logo}>
-        <Typography
-          variant="h1"
-          component="h2"
-          align="center"
-          style={{ fontFamily: "'Lobster', cursive" }}
-        >
-          BLOG
-        </Typography>
-      </Box>
     </>
   );
 };

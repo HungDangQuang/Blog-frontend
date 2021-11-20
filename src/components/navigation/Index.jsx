@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-const useStyle = makeStyles({
+const naviStyle = makeStyles({
   component: {
     background: "#FFFFFF",
     color: "black",
@@ -26,7 +26,7 @@ const useStyle = makeStyles({
 });
 
 const Navigation = () => {
-  const classes = useStyle();
+  const classes = naviStyle();
 
   const user = useSelector((state) => state.user);
 

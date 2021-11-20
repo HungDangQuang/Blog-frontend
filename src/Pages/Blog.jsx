@@ -4,7 +4,9 @@ import { makeStyles } from "@mui/styles";
 // Component
 import BlogLayout from "../containers/Blog";
 import Header from "../components/header/Index";
-
+import Navigation from "../components/navigation/Index";
+import Banner from "../components/banner/Index";
+import Title from "../components/title/Index";
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -12,7 +14,10 @@ const useStyles = makeStyles({
   },
   container: {
     margin: "0 10px",
-    // backgroundColor: "#fff",
+    backgroundColor: "#fff",
+  },
+  space: {
+    margin: "0 70px",
   },
 });
 
@@ -23,10 +28,11 @@ const Blog = () => {
       <Box className={classes.root}>
         <Box className={classes.container}>
           <Header />
-          <Box style={{ margin: "0 70px" }}>
-            <Box style={{ width: "100%" }}>
-              <BlogLayout />
-            </Box>
+          <Box className={classes.space}>
+            <Title />
+            <Navigation />
+            <Banner />
+            <BlogLayout />
           </Box>
         </Box>
       </Box>
