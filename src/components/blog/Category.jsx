@@ -39,7 +39,7 @@ const Categories = ({ match }) => {
   return (
     <>
       <Box className={classes.root}>
-        <Link to={`#`} style={{ textDecoration: "none" }}>
+        <Link to={"/create-post"} style={{ textDecoration: "none" }}>
           <Button variant="contained" className={classes.write}>
             Create Blog
           </Button>

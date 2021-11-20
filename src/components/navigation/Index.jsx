@@ -53,7 +53,7 @@ const Navigation = () => {
   return (
     <div className={classes.component}>
       <Toolbar className={classes.container}>
-        <Link to="#">HOME</Link>
+        <Link to="/home">HOME</Link>
         <Link to="#">ABOUT</Link>
         <Link to="#">CONTACT</Link>
         <Link to="#">{button}</Link>
