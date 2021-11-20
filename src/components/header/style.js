@@ -1,8 +1,8 @@
-const styleNavigation = {
+const styleHeader = {
   root: {
-    position: "static",
-    // background: "#2E3B55",
-    height: "200px",
+    width: "100%",
+    height: "58px",
+    background: "#04CCCC",
   },
   navbar: {
     margin: "0 30px",
@@ -13,15 +13,9 @@ const styleNavigation = {
     color: "#ccc",
     padding: "5px",
   },
-
-  logo: {
-    // border: "1px solid #ccc",
-    width: "100%",
-    height: "130px",
-  },
   search: {
     float: "left",
   },
 };
 
-export default styleNavigation;
+export default styleHeader;
