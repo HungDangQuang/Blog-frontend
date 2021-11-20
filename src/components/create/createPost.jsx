@@ -9,10 +9,9 @@ import {
 } from "@material-ui/core";
 
 import { AddCircle as Add, CallEnd } from "@material-ui/icons";
-// import { useHistory, useLocation } from "react-router-dom";
-
-// import { createPost, uploadFile } from "../../service/api";
-// import { LoginContext } from "../../context/ContextProvider";
+import { useNavigate, useLocation } from "react-router-dom";
+import { uploadFile } from "../../apis/uploadFile";
+import { createPost } from "../../apis/productApi";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -63,55 +62,56 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-// const initialPost = {
-//     title: '',
-//     description: '',
-//     picture: '',
-//     username: '',
-//     categories: '',
-//     createdDate: new Date()
-// }
+const initialPost = {
+  title: "",
+  description: "",
+  picture: "",
+  username: "",
+  categories: "",
+  createdDate: new Date(),
+};
 
 const CreatePost = () => {
   const classes = useStyle();
 
-  // const history = useHistory();
-  // const location = useLocation();
+  const navigation = useNavigate();
+  const location = useLocation();
 
-  // const [post, setPost] = useState(initialPost);
-  // const [file, setFile] = useState('');
-  // const [imageURL, setImageURL] = useState('');
-  // const { account, setAccount } = useContext(LoginContext);
+  const [post, setPost] = useState(initialPost);
+  const [file, setFile] = useState("");
+  const [imageURL, setImageURL] = useState("");
+  // const { account, setAccount } = useContext("");
 
   const url =
     "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
 
-  // useEffect(() => {
-  //     const getImage = async () => {
-  //         if(file) {
-  //             const data = new FormData();
-  //             data.append("name", file.name);
-  //             data.append("file", file);
+  useEffect(() => {
+    const getImage = async () => {
+      if (file) {
+        const data = new FormData();
+        data.append("name", file.name);
+        data.append("file", file);
 
-  //             const image = await uploadFile(data);
-  //             post.picture = image.data;
-  //             setImageURL(image.data);
-  //         }
-  //     }
-  //     getImage();
-  //     post.categories = location.search?.split('=')[1] || 'All'
-  //     post.username = account;
-  // }, [file])
+        const image = await uploadFile(data);
+        post.picture = image.data;
+        console.log(image);
+        setImageURL(image.data);
+      }
+    };
 
-  // const savePost = async () => {
-  //     await createPost(post);
-  //     history.push('/');
-  // }
+    getImage();
+    post.categories = location.search?.split("=")[1] || "All";
+    // post.username = account;
+  }, [file]);
 
-  // const handleChange = (e) => {
-  //     setPost({ ...post, [e.target.name]: e.target.value });
-  // }
+  const savePost = async () => {
+    await createPost(post);
+    navigation("/");
+  };
 
+  const handleChange = (e) => {
+    setPost({ ...post, [e.target.name]: e.target.value });
+  };
   return (
     <Box className={classes.container}>
       <img src={url} alt="post" className={classes.image} />
@@ -123,6 +123,7 @@ const CreatePost = () => {
             name="title"
             placeholder="Title"
             className={classes.textfield}
+            onChange={(e) => handleChange(e)}
           />
         </Box>
         <Box style={{ width: "100%" }}>
@@ -133,6 +134,7 @@ const CreatePost = () => {
             placeholder="Write something awesome..."
             className={classes.textarea}
             name="description"
+            onChange={(e) => handleChange(e)}
           />
         </Box>
 
@@ -150,12 +152,17 @@ const CreatePost = () => {
               type="file"
               id="fileInput"
               style={{ display: "none" }}
-              //   onChange={(e) => setFile(e.target.files[0])}
+              onChange={(e) => setFile(e.target.files[0])}
             />
           </FormControl>
         </Box>
 
-        <Button xs={{ marginTop: "10px" }} variant="contained" color="primary">
+        <Button
+          onClick={() => savePost()}
+          xs={{ marginTop: "10px" }}
+          variant="contained"
+          color="primary"
+        >
           Create
         </Button>
       </Box>
