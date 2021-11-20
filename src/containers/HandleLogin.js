@@ -10,6 +10,7 @@ const HandleLogin = () => {
   const dispatch = useDispatch();
 
   const handleLogin = async (values) => {
+
     dispatch(setLoading(true));
 
     const apiResponse = await loginUser(values);
@@ -21,6 +22,7 @@ const HandleLogin = () => {
         type: "success",
       };
       dispatch(setMessage(payloadSuccess));
+
       setTimeout(() => {
         window.location.href = "/home";
       }, 1000);
