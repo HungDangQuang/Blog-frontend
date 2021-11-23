@@ -1,10 +1,4 @@
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  makeStyles,
-  Button,
-} from "@material-ui/core";
+import { Toolbar, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import Categories from "../blog/Category";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -49,6 +43,9 @@ const Navigation = () => {
         </div>
         <Link to="/about">ABOUT</Link>
         <Link to="/contact">CONTACT</Link>
+        <div>
+          <Link to="/login">LOGIN</Link>
+        </div>
       </Toolbar>
     </div>
   );
