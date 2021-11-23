@@ -1,0 +1,30 @@
+
+.footer-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+
+    background-color: rgb(46, 44, 44);
+}
+
+.social li{
+    float: left;
+    text-decoration: none;
+    list-style: none;
+    padding: 15px;
+}
+
+.social h3 {
+    color: aliceblue;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    margin-top: 10px;
+}
+.social ion-icon {
+    color:aliceblue
+}
+
+.social ion-icon:hover {
+    transform: scale(1.5);
+}

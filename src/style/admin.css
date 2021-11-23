@@ -1,0 +1,18 @@
+.css_contaner {
+    display: flex;
+    min-height: 100%;
+    overflow: hidden;
+}
+.nar_post {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.post_list {
+    margin-left: 300px;
+    flex-grow: 1;
+    overflow: auto;
+    min-height: 100%;
+    padding-bottom: 80px;
+}

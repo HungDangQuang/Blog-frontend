@@ -1,13 +1,12 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import { Delete, Edit } from "@material-ui/icons";
-import { Link, useNavigate } from "react-router-dom";
-import { getOnePost, deletePost, updatePost } from "../../apis/productApi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { getOnePost, deletePost } from "../../apis/productApi";
 
-// import { LoginContext } from "../../context/ContextProvider";
-
+import { useSelector } from "react-redux";
+import Comments from "./comment/Comments";
 //components
-// import Comments from "./comments/Comments";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -18,8 +17,10 @@ const useStyle = makeStyles((theme) => ({
   },
   image: {
     width: "100%",
-    height: "50vh",
+    height: "60vh",
     objectFit: "cover",
+    marginTop: 20,
+    borderRadius: 5,
   },
   icons: {
     float: "right",
@@ -31,10 +32,11 @@ const useStyle = makeStyles((theme) => ({
     borderRadius: 10,
   },
   heading: {
+    marginTop: 100,
     fontSize: 38,
     fontWeight: 600,
     textAlign: "center",
-    margin: "50px 0 10px 0",
+    margin: "70px 0 10px 0",
   },
   author: {
     color: "#878787",
@@ -50,65 +52,44 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-const ViewDetail = ({ match }) => {
+const ViewDetail = () => {
   const classes = useStyle();
   const url =
     "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
   const navigation = useNavigate();
 
   const [post, setPost] = useState({});
-  // const { account, setAccount } = useContext("");
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
-      // let data = await getOnePost(match._id);
-      setPost();
+      let data = await getOnePost(id);
+      setPost(data);
+      console.log(data);
     };
     fetchData();
-    // console.log(account, post.username);
-  }, []);
-
-  const deleteBlog = async () => {
-    await deletePost(post._id);
-    navigation("/");
-  };
+  }, [id]);
 
   return (
     <Box className={classes.container}>
-      <img src={url} alt="post" className={classes.image} />
-      <Box className={classes.icons}>
-        {post && (
-          <>
-            <Link to={"#"}>
-              <Edit className={classes.icon} color="primary" />
-            </Link>
-            <Link>
-              <Delete
-                onClick={() => deleteBlog()}
-                className={classes.icon}
-                color="error"
-              />
-            </Link>
-          </>
-        )}
-      </Box>
-      <Typography className={classes.heading}></Typography>
+      <Typography className={classes.heading}>{post.title}</Typography>
 
-      <Box className={classes.color}>
-        <Link to={"#"} className={classes.link}>
+      <img src={post.picture} alt="post" className={classes.image} />
+
+      <Box className={classes.author}>
+        <Link to={`/?username=${post.username}?`} className={classes.link}>
           <Typography>
-            Author: <span style={{ fontWeight: 600 }}></span>
+            Author: <span style={{ fontWeight: 600 }}>{post.username}</span>
           </Typography>
         </Link>
         <Typography style={{ marginLeft: "auto" }}>
-          {/* {new Date(post.createAt).toDateString()} */}
+          {new Date(post.createdDate).toDateString()}
         </Typography>
       </Box>
 
-      <Typography className={classes.detail}></Typography>
-      {/* <Comments post={post} /> */}
+      <Typography className={classes.detail}>{post.description}</Typography>
+      <Comments post={post} />
     </Box>
   );
 };
-
 export default ViewDetail;
