@@ -1,8 +1,8 @@
 import HeaderAd from "../components/admin/layout/HeaderAd";
-import CreatePost from "../components/create/createPost";
+import AdminPage from "../containers/AdminPage";
 import Navbar from "../components/admin/layout/NarBar";
 import "../style/admin.css";
-export default function Create() {
+export default function Admin() {
   return (
     <>
       <HeaderAd />
@@ -11,7 +11,7 @@ export default function Create() {
           <Navbar />
         </div>
         <div className="post_list">
-          <CreatePost />
+          <AdminPage />
         </div>
       </div>
     </>

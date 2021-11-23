@@ -14,6 +14,7 @@ const HandleLogin = () => {
 
     const apiResponse = await loginUser(values);
     const success = apiResponse?.success;
+    console.log(values);
 
     if (!success) {
       const payloadSuccess = {
@@ -23,7 +24,7 @@ const HandleLogin = () => {
       dispatch(setMessage(payloadSuccess));
 
       setTimeout(() => {
-        window.location.href = "/home";
+        window.location.href = "/";
       }, 1000);
     } else {
       dispatch(setMessage(apiResponse));

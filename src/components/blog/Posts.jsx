@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-import { Grid, Box } from "@material-ui/core";
-import { Link, useLocation } from "react-router-dom";
+import { Box } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { getAllPosts } from "../../apis/productApi";
 //components
 import Card from "../card/Index";
 
 const Posts = () => {
   const [posts, getPosts] = useState([]);
-  const { search } = useLocation();
-
   useEffect(() => {
     const fetchData = async () => {
-      let data = await getAllPosts(search); // params in url
+      let data = await getAllPosts(); // params in url
       getPosts(data);
     };
     fetchData();
-  }, [search]);
+  }, []);
 
   return (
     <>
@@ -29,7 +27,7 @@ const Posts = () => {
           </Link>
         ))
       ) : (
-        <Box style={{ color: "878787", margin: "30px 80px", fontSize: 18 }}>
+        <Box style={{ color: "878787", margin: "30px 80px", fontSize: 15 }}>
           No data is available for selected category
         </Box>
       )}

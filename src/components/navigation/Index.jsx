@@ -6,16 +6,22 @@ import {
   Button,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import Categories from "../blog/Category";
+import { IoMdArrowDropdown } from "react-icons/io";
+
+import "../../style/container.css";
 const naviStyle = makeStyles({
   component: {
+    position: "fixed",
+    top: 0,
+    left: 0,
     background: "#FFFFFF",
+    width: "100%",
     color: "black",
   },
   container: {
     justifyContent: "center",
     borderBottom: "1px solid #ccc",
-    marginBottom: "35px",
     height: "50px",
     "&  >*": {
       padding: 20,
@@ -28,35 +34,21 @@ const naviStyle = makeStyles({
 const Navigation = () => {
   const classes = naviStyle();
 
-  const user = useSelector((state) => state.user);
-
-  const login = async () => (window.location.href = "/login");
-
-  const button = user.email ? (
-    <Button
-      style={{
-        background: "unset",
-        border: "none",
-        fontSize: 17,
-        textTransform: "uppercase",
-        fontFamily: "Roboto",
-        cursor: "pointer",
-        opacity: 0.8,
-      }}
-    >
-      Logout
-    </Button>
-  ) : (
-    <Button onClick={login}>Login</Button>
-  );
-
   return (
     <div className={classes.component}>
       <Toolbar className={classes.container}>
-        <Link to="/home">HOME</Link>
-        <Link to="#">ABOUT</Link>
-        <Link to="#">CONTACT</Link>
-        <Link to="#">{button}</Link>
+        <Link to="/">HOME</Link>
+        <div className="dropdown">
+          <Link to="" style={{ color: "#000000" }}>
+            CATEGORY
+            <IoMdArrowDropdown />
+          </Link>
+          <div className="dropdown-content">
+            <Categories />
+          </div>
+        </div>
+        <Link to="/about">ABOUT</Link>
+        <Link to="/contact">CONTACT</Link>
       </Toolbar>
     </div>
   );

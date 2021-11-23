@@ -1,4 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getAllPosts } from "../../apis/productApi";
+
+export const getProduct = createAsyncThunk("post/getProduct", async () => {
+  const apiRes = await getAllPosts();
+  if (apiRes.data) {
+    return apiRes.data;
+  }
+  return {};
+});
 
 const postReducer = createSlice({
   name: "posts",
@@ -20,6 +29,12 @@ const postReducer = createSlice({
       if (postIndex >= 0) {
         state[postIndex] = newPost;
       }
+    },
+  },
+
+  extraReducers: {
+    [getProduct.fulfilled]: (state) => {
+      return { ...state };
     },
   },
 });
