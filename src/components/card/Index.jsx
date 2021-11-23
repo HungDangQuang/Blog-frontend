@@ -18,7 +18,6 @@ const useStyle = makeStyles({
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    "&:hover": {},
   },
   textColor: {
     textAlign: "center",

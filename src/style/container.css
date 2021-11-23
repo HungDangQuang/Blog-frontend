@@ -2,9 +2,6 @@
     margin: 50px 100px;
 }
 .card {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    background-color: #f4f7f6;
     border: none;
     position: static;
 }
@@ -23,3 +20,41 @@
     display: block;
   }
  
+
+  .pagination-self{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(244,247,246);
+  }
+ ul {
+    margin-bottom: none !important;
+  }
+
+  .pagination-self button {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #F7F7F7;
+  }
+  button:focus {
+    outline: none;
+    background-color: #A1E6C9;
+  }
+  button:hover {
+    background-color: #A1E6C9;
+
+  }
+  .pagination-self li {
+
+    list-style: none;
+  }
+  .pagition-item {
+    margin: 5px;
+  }
+  .pagination-link {
+    font-size:15px;
+    display: inline-block;
+    border-radius: 50%;
+  }
