@@ -1,22 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useSelector } from "react-redux";
-import { categories } from "../../config/data";
-import Autocomplete from "@mui/material/Autocomplete";
-
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {
   Box,
-  TextField,
   makeStyles,
   TextareaAutosize,
   Button,
+  FormControl,
   InputBase,
 } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
-import { useNavigate, useLocation } from "react-router-dom";
-import { createPost } from "../../apis/productApi";
+import { updatePost, getOnePost } from "../../apis/productApi";
 
 const useStyle = makeStyles((theme) => ({
-  container: {
+  textupdate: {
     margin: "100px 95px",
     [theme.breakpoints.down("md")]: {
       margin: 0,
@@ -35,8 +32,6 @@ const useStyle = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    border: "1px dashed #000000",
-    borderRadius: "5px",
   },
   textfield: {
     width: "100%",
@@ -70,73 +65,83 @@ const initialPost = {
   title: "",
   description: "",
   picture: "",
-  username: "Admin",
-  categories: "Travel",
+  username: "",
+  categories: "",
   createdDate: new Date(),
 };
 
-const CreatePost = () => {
+const Update = ({ match }) => {
   const classes = useStyle();
-
-  const user = useSelector((state) => state.user);
-
   const navigation = useNavigate();
-  const location = useLocation();
-
+  const { id } = useParams();
   const [post, setPost] = useState(initialPost);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await getOnePost(id);
+      setPost(data);
+    };
+    fetchData();
+  }, [id]);
+
+  console.log(id);
+  console.log(post.title);
+
+  const updateBlogPost = async () => {
+    await updatePost(id, post);
+
+    navigation("/admin");
+  };
 
   const handleChange = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
 
-  const savePost = async () => {
-    await createPost(post);
-    navigation("/admin");
-    console.log(post);
-  };
   return (
-    <Box className={classes.container}>
-      <Box className={classes.content}>
+    <Box className={classes.textupdate}>
+      <FormControl className={classes.title}>
         <Box style={{ width: "100%" }}>
           <h5> Title</h5>
           <InputBase
+            onChange={(e) => handleChange(e)}
+            value={post.title}
             name="title"
             className={classes.textfield}
-            onChange={(e) => handleChange(e)}
           />
         </Box>
-
         <Box style={{ width: "100%" }}>
           <h5> ImageURL</h5>
           <InputBase
+            onChange={(e) => handleChange(e)}
+            value={post.picture}
             name="picture"
             className={classes.textfield}
-            onChange={(e) => handleChange(e)}
           />
         </Box>
+
         <Box style={{ width: "100%" }}>
           <h5>Content</h5>
           <TextareaAutosize
             rowsMin={7}
             space
+            name="discription"
+            value={post.description}
             placeholder="Write something awesome..."
             className={classes.textarea}
-            name="description"
             onChange={(e) => handleChange(e)}
           />
         </Box>
 
         <Button
-          onClick={() => savePost()}
-          xs={{ marginTop: "10px" }}
+          onClick={() => updateBlogPost()}
           variant="contained"
           color="primary"
         >
-          Create
+          Update
         </Button>
-      </Box>
+      </FormControl>
     </Box>
   );
 };
 
-export default CreatePost;
+export default Update;

@@ -26,7 +26,7 @@ const About = () => {
     <Box>
       <Box className={classes.banner}></Box>
       <Box className={classes.wrapper}>
-        <Typography variant="h3">Code for Interview</Typography>
+        <Typography variant="h3">Hi There! I'm Administrator</Typography>
         <Typography variant="h5" className={classes.text}>
           I'm a Software Engineer based in India. I've built websites, desktop
           applications and corporate software.
