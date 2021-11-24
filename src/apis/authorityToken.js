@@ -4,7 +4,7 @@ const getToken = (token) => {
 
 const getAccessToken = () => {
   const token = JSON.parse(localStorage.getItem("blogToken"));
-  return token?.access.token;
+  return token;
 };
 
 export { getAccessToken, getToken };

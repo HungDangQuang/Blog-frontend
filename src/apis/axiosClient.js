@@ -9,13 +9,14 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(async (config) => {
   const token = await getAccessToken();
+
   if (token) {
     config.headers = {
       Authorization: `Bearer ${token}`,
       "content-type": "application/json",
     };
   }
-  console.log(config);
+  console.log(token);
   return config;
 });
 

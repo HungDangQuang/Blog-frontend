@@ -1,18 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useSelector } from "react-redux";
-import { categories } from "../../config/data";
-import Autocomplete from "@mui/material/Autocomplete";
+import React, { useState } from "react";
 
 import {
   Box,
-  TextField,
   makeStyles,
   TextareaAutosize,
   Button,
   InputBase,
 } from "@material-ui/core";
-
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createPost } from "../../apis/productApi";
 
 const useStyle = makeStyles((theme) => ({
@@ -44,7 +39,7 @@ const useStyle = makeStyles((theme) => ({
     padding: "5px",
     borderRadius: "5px",
     border: "1px solid #000000",
-    fontSize: 25,
+    fontSize: 16,
   },
   textarea: {
     width: "100%",
@@ -78,10 +73,7 @@ const initialPost = {
 const CreatePost = () => {
   const classes = useStyle();
 
-  const user = useSelector((state) => state.user);
-
   const navigation = useNavigate();
-  const location = useLocation();
 
   const [post, setPost] = useState(initialPost);
 
@@ -97,13 +89,29 @@ const CreatePost = () => {
   return (
     <Box className={classes.container}>
       <Box className={classes.content}>
-        <Box style={{ width: "100%" }}>
-          <h5> Title</h5>
-          <InputBase
-            name="title"
-            className={classes.textfield}
-            onChange={(e) => handleChange(e)}
-          />
+        <Box
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-around",
+          }}
+        >
+          <Box style={{ width: "100%", marginRight: 3 }}>
+            <h5> Title</h5>
+            <InputBase
+              name="title"
+              className={classes.textfield}
+              onChange={(e) => handleChange(e)}
+            />
+          </Box>
+          <Box style={{ width: "100%", marginLeft: 3 }}>
+            <h5> Category</h5>
+            <InputBase
+              name="categories"
+              className={classes.textfield}
+              onChange={(e) => handleChange(e)}
+            />
+          </Box>
         </Box>
 
         <Box style={{ width: "100%" }}>

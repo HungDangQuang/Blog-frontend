@@ -1,13 +1,22 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getUserInfo } from "../../apis/user";
 
-export const getUser = createAsyncThunk("user/getUser", async () => {});
-const userSlice = createSlice({
+export const getUser = createAsyncThunk("user/", async () => {
+  const apiRes = await getUserInfo();
+  if (apiRes.data) {
+    return apiRes.data.user;
+  }
+  console.log(apiRes);
+  return {};
+});
+
+const userReducer = createSlice({
   name: "user",
 
   initialState: {
     loading: false,
     isLogin: false,
-    username: "",
+    name: "",
     avatar: "",
     email: "",
   },
@@ -15,12 +24,14 @@ const userSlice = createSlice({
   reducers: {
     // standard reducer logic, with auto-generated action types per reduce
   },
+
   extraReducers: {
     [getUser.pending]: (state) => {
       return { ...state, loading: true };
     },
     [getUser.fulfilled]: (state, action) => {
       const { username, email, avatar } = action.payload;
+
       if (!email) {
         return { ...state, loading: false, isLogin: false };
       }
@@ -35,5 +46,5 @@ const userSlice = createSlice({
   },
 });
 
-const { reducer } = userSlice;
+const { reducer } = userReducer;
 export default reducer;

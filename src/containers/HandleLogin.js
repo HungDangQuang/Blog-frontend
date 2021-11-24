@@ -1,38 +1,49 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-
+import React, { useState } from "react";
 import { LoginForm } from "../components/authentication/Login/index";
 import { loginUser } from "../apis/account";
-import { setLoading, setMessage } from "../redux/reducers/alertSlide";
-
+import { getToken } from "../apis/authorityToken";
+import { getUserInfo } from "../apis/user";
+import Notification from "../components/alertMessage";
+import Loading from "../components/loading/Loading.jsx";
 const HandleLogin = () => {
-  const { loading } = useSelector((state) => state.message);
-  const dispatch = useDispatch();
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
 
+  const [loading, setLoading] = useState(false);
+
+  console.log(loading);
   const handleLogin = async (values) => {
-    dispatch(setLoading(true));
-
+    setLoading(true);
     const apiResponse = await loginUser(values);
     const success = apiResponse?.success;
-    console.log(values);
+    const apiRes = await getUserInfo();
+
+    console.log(apiRes);
+
+    getToken(apiResponse.accessToken);
 
     if (!success) {
-      const payloadSuccess = {
+      setNotify({
+        isOpen: true,
         message: "Login Successfully",
         type: "success",
-      };
-      dispatch(setMessage(payloadSuccess));
-
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 1000);
-    } else {
-      dispatch(setMessage(apiResponse));
+      });
+      // setTimeout(() => {
+      //   window.location.href = "/admin";
+      // }, 2000);
     }
   };
-  dispatch(setLoading(false));
 
-  return <LoginForm handleLogin={handleLogin} loading={loading}></LoginForm>;
+  return (
+    <>
+      <Notification notify={notify} setNotify={setNotify} />
+
+      <LoginForm handleLogin={handleLogin} loading={loading}></LoginForm>
+    </>
+  );
 };
 
 export { HandleLogin };

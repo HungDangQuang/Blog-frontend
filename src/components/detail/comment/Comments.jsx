@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Box, TextareaAutosize, Button, makeStyles } from "@material-ui/core";
 
-import { createComment, getComments } from "../../../apis/commentApi";
+import { createComment, getAllComment } from "../../../apis/commentApi";
 
 //components
 import Comment from "./Comment";
 
 const useStyles = makeStyles({
   container: {
-    marginTop: 100,
+    marginTop: 40,
     display: "flex",
     "& > *": {
       // padding: '10px '
@@ -31,14 +31,13 @@ const useStyles = makeStyles({
 
 const initialValue = {
   name: "",
-  postId: "",
+  postID: "",
   date: new Date(),
-  comments: "",
+  comment: "",
 };
 
 const Comments = ({ post }) => {
   const classes = useStyles();
-  const url = "https://static.thenounproject.com/png/12017-200.png";
 
   const [comment, setComment] = useState(initialValue);
   const [comments, setComments] = useState([]);
@@ -47,22 +46,25 @@ const Comments = ({ post }) => {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await getComments(post._id);
+      const response = await getAllComment();
       setComments(response);
+      console.log(response);
     };
     getData();
   }, [toggle, post]);
 
+  console.log(comment);
+
   const handleChange = (e) => {
     setComment({
-      ...comment,
       name: post.username,
-      postId: post._id,
-      comments: e.target.value,
+      postID: post._id,
+      date: new Date(),
+      comment: e.target.value,
     });
     setData(e.target.value);
   };
-  console.log(comment);
+
   const addComment = async () => {
     await createComment(comment);
     setData("");
@@ -71,10 +73,10 @@ const Comments = ({ post }) => {
 
   return (
     <Box>
+      <h4 style={{ marginTop: 50, fontWeight: 1000 }}>Comment</h4>
       <Box className={classes.container}>
-        <img src={url} className={classes.image} alt="dp" />
         <TextareaAutosize
-          rowsMin={5}
+          rowsMin={2}
           className={classes.textarea}
           placeholder="what's on your mind?"
           onChange={(e) => handleChange(e)}
@@ -82,7 +84,7 @@ const Comments = ({ post }) => {
         />
         <Button
           variant="contained"
-          color="primary"
+          color="rgb(53, 219, 44)"
           size="medium"
           className={classes.button}
           onClick={(e) => addComment(e)}

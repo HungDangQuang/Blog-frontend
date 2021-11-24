@@ -1,13 +1,5 @@
-import {
-  Button,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  makeStyles,
-} from "@material-ui/core";
-import { Link, useLocation } from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import { categories } from "../../config/data";
 

@@ -4,7 +4,6 @@ import {
   makeStyles,
   TextareaAutosize,
   Button,
-  FormControl,
   InputBase,
 } from "@material-ui/core";
 

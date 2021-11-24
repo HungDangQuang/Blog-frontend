@@ -28,6 +28,11 @@ const naviStyle = makeStyles({
 const Navigation = () => {
   const classes = naviStyle();
 
+  const handleLogout = () => {
+    localStorage.removeItem("blogToken");
+    window.location.href = "/login";
+  };
+
   return (
     <div className={classes.component}>
       <Toolbar className={classes.container}>
@@ -44,7 +49,9 @@ const Navigation = () => {
         <Link to="/about">ABOUT</Link>
         <Link to="/contact">CONTACT</Link>
         <div>
-          <Link to="/login">LOGIN</Link>
+          <Link to="#" onClick={handleLogout}>
+            LOGIN
+          </Link>
         </div>
       </Toolbar>
     </div>

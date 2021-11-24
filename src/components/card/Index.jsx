@@ -1,4 +1,4 @@
-import { makeStyles, Box, Typography, Hidden } from "@material-ui/core";
+import { makeStyles, Box, Typography } from "@material-ui/core";
 
 const useStyle = makeStyles({
   container_card: {

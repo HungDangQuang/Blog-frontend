@@ -1,6 +1,4 @@
 import { Typography, Box, makeStyles } from "@material-ui/core";
-import { Delete } from "@material-ui/icons";
-import { deleteComment } from "../../../apis/commentApi";
 const useStyles = makeStyles({
   component: {
     marginTop: 30,
@@ -13,7 +11,8 @@ const useStyles = makeStyles({
   },
   name: {
     fontWeight: 600,
-    fontSize: 18,
+    fontSize: 16,
+    color: "rgb(209, 209, 25)",
     marginRight: 20,
   },
   date: {
@@ -28,11 +27,6 @@ const useStyles = makeStyles({
 const Comment = ({ comment, setToggle }) => {
   const classes = useStyles();
 
-  const removeComment = async () => {
-    await deleteComment(comment._id);
-    setToggle((prev) => !prev);
-  };
-
   return (
     <Box className={classes.component}>
       <Box className={classes.container}>
@@ -40,9 +34,8 @@ const Comment = ({ comment, setToggle }) => {
         <Typography className={classes.date}>
           {new Date(comment.date).toDateString()}
         </Typography>
-        <Delete className={classes.delete} onClick={() => removeComment()} />
       </Box>
-      <Typography>{comment.comments}</Typography>
+      <Typography style={{ marginLeft: 71 }}>{comment.comment}</Typography>
     </Box>
   );
 };

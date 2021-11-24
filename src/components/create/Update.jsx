@@ -8,6 +8,7 @@ import {
   FormControl,
   InputBase,
 } from "@material-ui/core";
+import { Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { updatePost, getOnePost } from "../../apis/productApi";
@@ -84,9 +85,6 @@ const Update = ({ match }) => {
     fetchData();
   }, [id]);
 
-  console.log(id);
-  console.log(post.title);
-
   const updateBlogPost = async () => {
     await updatePost(id, post);
 
@@ -100,15 +98,27 @@ const Update = ({ match }) => {
   return (
     <Box className={classes.textupdate}>
       <FormControl className={classes.title}>
-        <Box style={{ width: "100%" }}>
-          <h5> Title</h5>
-          <InputBase
-            onChange={(e) => handleChange(e)}
-            value={post.title}
-            name="title"
-            className={classes.textfield}
-          />
-        </Box>
+        <Stack>
+          <Box style={{ width: "100%" }}>
+            <h5> Title</h5>
+            <InputBase
+              onChange={(e) => handleChange(e)}
+              value={post.title}
+              name="title"
+              className={classes.textfield}
+            />
+          </Box>
+          <Box style={{ width: "100%" }}>
+            <h5> Category</h5>
+            <InputBase
+              onChange={(e) => handleChange(e)}
+              value={post.categories}
+              name="categories"
+              className={classes.textfield}
+            />
+          </Box>
+        </Stack>
+
         <Box style={{ width: "100%" }}>
           <h5> ImageURL</h5>
           <InputBase

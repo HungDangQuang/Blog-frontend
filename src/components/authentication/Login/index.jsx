@@ -7,6 +7,8 @@ import { Link as RouterLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import eyeFill from "@iconify/icons-eva/eye-fill";
 import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
+import Controls from "../../controls/index";
+import * as ReactBootStrap from "react-bootstrap";
 // material
 import {
   Link,
@@ -99,16 +101,16 @@ const LoginForm = ({ handleLogin, loading }) => {
             Forgot password?
           </Link>
         </Stack>
-
-        <Button
+        <Controls.Button
           fullWidth
           size="large"
           type="submit"
           variant="contained"
-          // loading={loading}
-        >
-          Login
-        </Button>
+          text="Login"
+          endIcon={
+            loading && <ReactBootStrap.Spinner animation="border" size="sm" />
+          }
+        ></Controls.Button>
       </Form>
     </FormikProvider>
   );

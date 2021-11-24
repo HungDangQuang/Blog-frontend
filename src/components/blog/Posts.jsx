@@ -41,6 +41,7 @@ const Posts = () => {
         {currentPosts.length ? (
           currentPosts.map((post) => (
             <Link
+              key={post._id}
               style={{ textDecoration: "none", color: "inherit" }}
               to={`details/${post._id}`}
             >
