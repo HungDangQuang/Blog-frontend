@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { Box, TextareaAutosize, Button, makeStyles } from "@material-ui/core";
 
 import { createComment, getAllComment } from "../../../apis/commentApi";
-
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 //components
 import Comment from "./Comment";
-
+import { Navigate } from "react-router";
+import ConfirmDialog from "../../alertMessage/ConfirmDialog";
 const useStyles = makeStyles({
   container: {
     marginTop: 40,
@@ -38,11 +40,19 @@ const initialValue = {
 
 const Comments = ({ post }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user);
 
   const [comment, setComment] = useState(initialValue);
   const [comments, setComments] = useState([]);
   const [data, setData] = useState();
   const [toggle, setToggle] = useState(false);
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
 
   useEffect(() => {
     const getData = async () => {
@@ -51,13 +61,11 @@ const Comments = ({ post }) => {
       console.log(response);
     };
     getData();
-  }, [toggle, post]);
-
-  console.log(comment);
+  }, [toggle, user]);
 
   const handleChange = (e) => {
     setComment({
-      name: post.username,
+      name: user.username,
       postID: post._id,
       date: new Date(),
       comment: e.target.value,
@@ -65,14 +73,60 @@ const Comments = ({ post }) => {
     setData(e.target.value);
   };
 
+  console.log(comment);
   const addComment = async () => {
     await createComment(comment);
     setData("");
     setToggle((prev) => !prev);
   };
 
+  const handleLogin = () => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
+    navigate("/login");
+  };
+
+  const buttonComment = user.isLogin ? (
+    <Button
+      variant="contained"
+      color="rgb(53, 219, 44)"
+      size="medium"
+      className={classes.button}
+      onClick={(e) => addComment(e)}
+    >
+      Post
+    </Button>
+  ) : (
+    <Button
+      variant="contained"
+      color="rgb(53, 219, 44)"
+      size="medium"
+      className={classes.button}
+      s
+      onClick={() => {
+        setConfirmDialog({
+          isOpen: true,
+          title: "Please login before commenting !",
+          subTitle: `Click ${"Yes"} to login`,
+          onConfirm: () => {
+            handleLogin();
+          },
+        });
+      }}
+    >
+      Post
+    </Button>
+  );
+
   return (
     <Box>
+      <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
+
       <h4 style={{ marginTop: 50, fontWeight: 1000 }}>Comment</h4>
       <Box className={classes.container}>
         <TextareaAutosize
@@ -82,15 +136,7 @@ const Comments = ({ post }) => {
           onChange={(e) => handleChange(e)}
           value={data}
         />
-        <Button
-          variant="contained"
-          color="rgb(53, 219, 44)"
-          size="medium"
-          className={classes.button}
-          onClick={(e) => addComment(e)}
-        >
-          Post
-        </Button>
+        {buttonComment}
       </Box>
       <Box>
         {comments &&

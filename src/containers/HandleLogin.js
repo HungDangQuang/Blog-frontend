@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { LoginForm } from "../components/authentication/Login/index";
 import { loginUser } from "../apis/account";
-import { getToken } from "../apis/authorityToken";
-import { getUserInfo } from "../apis/user";
+import { getToken, getID } from "../apis/authorityToken";
 import Notification from "../components/alertMessage";
-import Loading from "../components/loading/Loading.jsx";
+import { useSelector } from "react-redux";
 const HandleLogin = () => {
   const [notify, setNotify] = useState({
     isOpen: false,
@@ -14,16 +13,15 @@ const HandleLogin = () => {
 
   const [loading, setLoading] = useState(false);
 
-  console.log(loading);
+  const user = useSelector((state) => state.user);
+
   const handleLogin = async (values) => {
     setLoading(true);
     const apiResponse = await loginUser(values);
     const success = apiResponse?.success;
-    const apiRes = await getUserInfo();
-
-    console.log(apiRes);
 
     getToken(apiResponse.accessToken);
+    getID(apiResponse.id);
 
     if (!success) {
       setNotify({
@@ -31,10 +29,16 @@ const HandleLogin = () => {
         message: "Login Successfully",
         type: "success",
       });
-      // setTimeout(() => {
-      //   window.location.href = "/admin";
-      // }, 2000);
+
+      setTimeout(() => {
+        if (user.role == "admin") {
+          window.location.href = "/admin";
+        } else {
+          window.location.href = "/home";
+        }
+      }, 1000);
     }
+    setLoading(false);
   };
 
   return (

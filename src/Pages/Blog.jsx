@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux";
 // Component
 import Posts from "../components/blog/Posts";
 import Navigation from "../components/navigation/Index";
@@ -19,9 +18,6 @@ const useStyles = makeStyles({
 });
 
 const Blog = () => {
-  const user = useSelector((state) => state.user);
-
-  console.log(user);
   const classes = useStyles();
   return (
     <>

@@ -15,10 +15,12 @@ const getAllPosts = () => {
   });
 };
 
-const getOnePost = (id) => {
-  return axiosClient(`/post/${id}`, {
-    method: "GET",
-  });
+const getOnePost = async (id) => {
+  try {
+    return await axios.get(`${url}/post/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const updatePost = async (id, post) => {

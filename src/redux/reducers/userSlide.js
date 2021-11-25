@@ -1,36 +1,35 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getUserInfo } from "../../apis/user";
+import { getOneUser } from "../../apis/user";
+import { getAccessID } from "../../apis/authorityToken";
 
-export const getUser = createAsyncThunk("user/", async () => {
-  const apiRes = await getUserInfo();
-  if (apiRes.data) {
-    return apiRes.data.user;
-  }
-  console.log(apiRes);
-  return {};
+const id = getAccessID();
+
+console.log(`Id user:${id}`);
+
+export const getUser = createAsyncThunk("user", async () => {
+  const apiRes = await getOneUser(id);
+  return apiRes;
 });
 
 const userReducer = createSlice({
   name: "user",
-
   initialState: {
+    _id: "",
     loading: false,
     isLogin: false,
-    name: "",
-    avatar: "",
+    username: "",
     email: "",
+    role: "",
   },
 
-  reducers: {
-    // standard reducer logic, with auto-generated action types per reduce
-  },
+  reducers: {},
 
   extraReducers: {
     [getUser.pending]: (state) => {
       return { ...state, loading: true };
     },
     [getUser.fulfilled]: (state, action) => {
-      const { username, email, avatar } = action.payload;
+      const { _id, username, email, role } = action.payload;
 
       if (!email) {
         return { ...state, loading: false, isLogin: false };
@@ -38,9 +37,10 @@ const userReducer = createSlice({
       return {
         loading: false,
         isLogin: true,
+        _id,
         username,
         email,
-        avatar,
+        role,
       };
     },
   },

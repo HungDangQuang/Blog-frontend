@@ -66,7 +66,7 @@ const initialPost = {
   description: "",
   picture: "",
   username: "Admin",
-  categories: "Travel",
+  categories: "",
   createdDate: new Date(),
 };
 
@@ -84,7 +84,6 @@ const CreatePost = () => {
   const savePost = async () => {
     await createPost(post);
     navigation("/admin");
-    console.log(post);
   };
   return (
     <Box className={classes.container}>

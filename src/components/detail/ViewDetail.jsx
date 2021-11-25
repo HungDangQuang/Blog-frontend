@@ -53,15 +53,19 @@ const ViewDetail = () => {
   const classes = useStyle();
 
   const [post, setPost] = useState({});
+
   const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       let data = await getOnePost(id);
-      setPost(data);
+      setPost(data.data);
     };
     fetchData();
   }, [id]);
+
+  console.log(post);
+  console.log(post._id);
 
   return (
     <Box className={classes.container}>

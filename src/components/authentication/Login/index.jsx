@@ -18,7 +18,6 @@ import {
   IconButton,
   FormControlLabel,
   InputAdornment,
-  Button,
 } from "@mui/material";
 
 const LoginForm = ({ handleLogin, loading }) => {

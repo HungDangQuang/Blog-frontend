@@ -55,6 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar() {
   const handleLogout = () => {
     localStorage.removeItem("blogToken");
+    localStorage.removeItem("blogID");
     window.location.href = "/login";
   };
 

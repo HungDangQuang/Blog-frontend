@@ -80,7 +80,7 @@ const Update = ({ match }) => {
   useEffect(() => {
     const fetchData = async () => {
       let data = await getOnePost(id);
-      setPost(data);
+      setPost(data.data);
     };
     fetchData();
   }, [id]);

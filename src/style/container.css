@@ -51,3 +51,6 @@
     display: inline-block;
     border-radius: 50%;
   }
+  a:hover {
+    text-decoration: none;
+  }

@@ -18,7 +18,7 @@ import {
 import Notification from "../components/alertMessage/index";
 import ConfirmDialog from "../components/alertMessage/ConfirmDialog";
 import { getAllPosts, deletePost } from "../apis/productApi";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function BasicTable() {
   const { email } = useSelector((state) => state.user);
