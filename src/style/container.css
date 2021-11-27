@@ -4,6 +4,7 @@
 .card {
     border: none;
     position: static;
+    background-color: none;
 }
 
 .dropdown-content {
@@ -14,6 +15,7 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
   }
+
 
 
 .dropdown:hover .dropdown-content {
@@ -53,4 +55,23 @@
   }
   a:hover {
     text-decoration: none;
+  }
+
+  button:focus {
+    outline: none;
+    border: none;
+  }
+
+
+  .swap_big {
+    width: 100%;
+    height: 1000px;
+    background-image: url(https://images.unsplash.com/photo-1601662528567-526cd06f6582?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d2hpdGV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60);
+  }
+
+
+  .handle_big {
+    height:100%;
+    margin: 0 20px;
+    background-color: "#F4F7F6";
   }

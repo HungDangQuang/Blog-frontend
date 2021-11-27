@@ -16,8 +16,8 @@ const useStyle = makeStyles((theme) => ({
     alignItems: "center",
   },
   NavIcon: {
-    marginLeft: "2rem",
-    fontSize: "2rem",
+    marginLeft: "2.5rem",
+    fontSize: "2.5rem",
     height: "80px",
     display: "flex",
     justifyContent: "flex-start",

@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { Box, TextareaAutosize, Button, makeStyles } from "@material-ui/core";
-
-import { createComment, getAllComment } from "../../../apis/commentApi";
+import React from "react";
+import { createComment, getCommentsPost } from "../../../apis/commentApi";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 //components
 import Comment from "./Comment";
-import { Navigate } from "react-router";
 import ConfirmDialog from "../../alertMessage/ConfirmDialog";
 const useStyles = makeStyles({
   container: {
@@ -56,7 +55,7 @@ const Comments = ({ post }) => {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await getAllComment();
+      const response = await getCommentsPost(post._id);
       setComments(response);
       console.log(response);
     };

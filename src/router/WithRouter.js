@@ -8,32 +8,49 @@ import View from "../pages/View";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Admin from "../pages/Admin";
-import Update from "../pages/Update";
+import ManagerUpdate from "../pages/Update";
 import CommentPage from "../pages/CommentPage.jsx";
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router";
-const WithRouter = () => {
-  const user = useSelector((state) => state.user);
+import User from "../pages/User";
+import LoginA from "../pages/LoginA.jsx";
 
+import PrivateRoute from "./PrivateRouter";
+const WithRouter = () => {
   return (
     <Routes>
       <Route
-        path="/admin "
-        render={() => {
-          return user.isLogin ? <Admin /> : <Navigate to="/login" />;
-        }}
+        path="/admin"
+        element={
+          <PrivateRoute>
+            <Admin />
+          </PrivateRoute>
+        }
+      />
+      <Route path="/admin/login" element={<LoginA />} />
+      <Route
+        path="/user"
+        element={
+          <PrivateRoute>
+            <User />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/comment"
+        element={
+          <PrivateRoute>
+            <CommentPage />
+          </PrivateRoute>
+        }
       />
 
-      <Route exact path="/home" element={<Blog />} />
-      <Route path="/admin" element={<Admin />} />
+      <Route exact path="/" element={<Blog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/create" element={<Create />} />
-      <Route path="/home/details/:id" element={<View />} />
+      <Route path="/details/:id" element={<View />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/update/:id" element={<Update />} />
-      <Route path="/comment" element={<CommentPage />} />
+      <Route path="/update/:id" element={<ManagerUpdate />} />
     </Routes>
   );
 };

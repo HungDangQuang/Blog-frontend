@@ -1,9 +1,10 @@
+import React from "react";
 import HeaderAd from "../components/admin/layout/HeaderAd";
 import Navbar from "../components/admin/layout/NarBar";
 import "../style/admin.css";
-import CommentTable from "../containers/ManageComment";
+import CommentTable from "../containers/ManagerComment";
 
-export default function CommentPage() {
+function CommentPage() {
   return (
     <>
       <HeaderAd />
@@ -18,3 +19,5 @@ export default function CommentPage() {
     </>
   );
 }
+
+export default React.memo(CommentPage);

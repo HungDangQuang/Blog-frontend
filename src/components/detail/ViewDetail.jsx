@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import { Link, useParams } from "react-router-dom";
 import { getOnePost } from "../../apis/productApi";
@@ -58,14 +58,11 @@ const ViewDetail = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let data = await getOnePost(id);
-      setPost(data.data);
+      let res = await getOnePost(id);
+      setPost(res.data);
     };
     fetchData();
   }, [id]);
-
-  console.log(post);
-  console.log(post._id);
 
   return (
     <Box className={classes.container}>
@@ -89,4 +86,4 @@ const ViewDetail = () => {
     </Box>
   );
 };
-export default ViewDetail;
+export default React.memo(ViewDetail);

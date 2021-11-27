@@ -11,11 +11,10 @@ import * as ReactBootStrap from "react-bootstrap";
 // material
 import { Stack, TextField, IconButton, InputAdornment } from "@mui/material";
 
-const Register = ({ handleLogin, loading }) => {
+const Login = ({ handleLogin, loading }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    username: Yup.string().required("Username is required"),
     email: Yup.string()
       .email("Email must be a valid email address")
       .required("Email is required"),
@@ -24,9 +23,9 @@ const Register = ({ handleLogin, loading }) => {
 
   const formik = useFormik({
     initialValues: {
-      username: "",
       email: "",
       password: "",
+      remember: true,
     },
     validationSchema: LoginSchema,
     onSubmit: handleLogin,
@@ -45,16 +44,6 @@ const Register = ({ handleLogin, loading }) => {
           <TextField
             fullWidth
             autoComplete="username"
-            type="username"
-            label="Username"
-            {...getFieldProps("username")}
-            error={Boolean(touched.username && errors.username)}
-            helperText={touched.username && errors.username}
-          />
-
-          <TextField
-            fullWidth
-            autoComplete="email"
             type="email"
             label="Email address"
             {...getFieldProps("email")}
@@ -93,7 +82,7 @@ const Register = ({ handleLogin, loading }) => {
           size="large"
           type="submit"
           variant="contained"
-          text="Register"
+          text="Login"
           endIcon={
             loading && <ReactBootStrap.Spinner animation="border" size="sm" />
           }
@@ -103,8 +92,8 @@ const Register = ({ handleLogin, loading }) => {
   );
 };
 
-Register.propTypes = {
+Login.propTypes = {
   handleLogin: PropTypes.func,
 };
 
-export default Register;
+export default Login;

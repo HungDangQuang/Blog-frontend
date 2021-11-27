@@ -23,13 +23,13 @@ const getOnePost = async (id) => {
   }
 };
 
-const updatePost = async (id, post) => {
-  try {
-    return await axios.patch(`${url}/post/${id}`, post);
-  } catch (error) {
-    console.log("Error while calling updatePost API ", error);
-  }
+const updatePost = (id, params) => {
+  return axiosClient(`/post/${id}`, {
+    method: "PATCH",
+    data: params,
+  });
 };
+
 const deletePost = (params) => {
   return axiosClient(`/post/${params}`, {
     method: "DELETE",

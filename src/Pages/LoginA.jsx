@@ -1,12 +1,10 @@
-// components
-import HandleRegister from "../containers/HandleRegister";
-
 import React from "react";
 // material
 import { styled } from "@mui/material/styles";
 import { Card, Container, Typography } from "@mui/material";
 import background from "../assets/images/bg.jpg";
 // components
+import LoginAdmin from "../containers/LoginAdmin";
 // ----------------------------------------------------------------------
 
 const TitleStyle = styled(Typography)(({ theme }) => ({
@@ -26,7 +24,7 @@ const ContentStyle = styled("div")(({ theme }) => ({
   minwidth: 330,
   margin: "auto",
   display: "flex",
-  minHeight: "70vh",
+  minHeight: "60vh",
   flexDirection: "column",
   border: "1px solid #ccc",
   backgroundColor: "white",
@@ -42,7 +40,7 @@ const ContainerStyled = styled(Container)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const Register = () => {
+const LoginA = () => {
   return (
     <>
       <SectionStyle
@@ -57,7 +55,7 @@ const Register = () => {
             <TitleStyle variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
               Youbo
             </TitleStyle>
-            <HandleRegister />
+            <LoginAdmin />
           </ContentStyle>
         </ContainerStyled>
       </SectionStyle>
@@ -65,4 +63,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default LoginA;

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { LoginForm } from "../components/authentication/Login/index";
-import { loginUser } from "../apis/account";
-import { getToken, getID } from "../apis/authorityToken";
+import Login from "../components/authentication/LoginAdmin/index";
+import { loginAdmin } from "../apis/account";
+import { getToken } from "../apis/authorityToken";
 import Notification from "../components/alertMessage";
 
-const HandleLogin = () => {
+const LoginAdmin = () => {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
@@ -15,13 +15,11 @@ const HandleLogin = () => {
 
   const handleLogin = async (values) => {
     setLoading(true);
-    const apiResponse = await loginUser(values);
-    console.log(apiResponse);
+    const apiResponse = await loginAdmin(values);
     const success = apiResponse?.success;
     const failed = apiResponse?.failed;
 
     getToken(apiResponse.accessToken);
-    getID(apiResponse.id);
 
     if (!success) {
       setNotify({
@@ -30,8 +28,8 @@ const HandleLogin = () => {
         type: "success",
       });
       setTimeout(() => {
-        window.location.href = "/";
-      }, 2000);
+        window.location.href = "/admin";
+      }, 1000);
     } else if (!failed) {
       setNotify({
         isOpen: true,
@@ -46,8 +44,8 @@ const HandleLogin = () => {
     <>
       <Notification notify={notify} setNotify={setNotify} />
 
-      <LoginForm handleLogin={handleLogin} loading={loading}></LoginForm>
+      <Login handleLogin={handleLogin} loading={loading}></Login>
     </>
   );
 };
-export default HandleLogin;
+export default LoginAdmin;

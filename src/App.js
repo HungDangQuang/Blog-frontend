@@ -8,11 +8,9 @@ function App() {
   const dispatch = useDispatch();
   dispatch(getUser());
   return (
-    <>
-      <BrowserRouter>
-        <WithRouter />
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <WithRouter />
+    </BrowserRouter>
   );
 }
 

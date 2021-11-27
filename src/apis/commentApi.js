@@ -16,6 +16,15 @@ const getAllComment = () => {
   });
 };
 
+const getCommentsPost = async (id) => {
+  try {
+    let response = await axios.get(`${url}/comments/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log("Error while calling getComments API ", error);
+  }
+};
+
 const getComments = async (id) => {
   try {
     let response = await axios.get(`${url}/comment/${id}`);
@@ -30,4 +39,10 @@ const deleteComment = (params) => {
   });
 };
 
-export { createComment, getAllComment, getComments, deleteComment };
+export {
+  createComment,
+  getAllComment,
+  getComments,
+  deleteComment,
+  getCommentsPost,
+};

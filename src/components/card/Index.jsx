@@ -1,5 +1,5 @@
 import { makeStyles, Box, Typography } from "@material-ui/core";
-
+import React from "react";
 const useStyle = makeStyles({
   container_card: {
     margin: 10,
@@ -26,6 +26,7 @@ const useStyle = makeStyles({
   },
   heading: {
     fontSize: 18,
+    textAlign: "center",
     fontWeight: 600,
   },
   detail: {
@@ -50,7 +51,9 @@ const Card = ({ post }) => {
         <img src={url} alt="post" className={classes.image} />
       </Box>
       <Box className={classes.content_card}>
-        <Typography className={classes.textColor}>{post.categories}</Typography>
+        <Typography className={classes.textColor}>
+          {post.createdDate}
+        </Typography>
         <Typography className={classes.heading}>
           {addEllipsis(post.title, 50)}
         </Typography>

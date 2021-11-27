@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Notification from "../alertMessage/index";
 
 import {
   Box,
@@ -9,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { createPost } from "../../apis/productApi";
+import * as ReactBootStrap from "react-bootstrap";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -22,7 +24,6 @@ const useStyle = makeStyles((theme) => ({
     height: "60vh",
     objectFit: "cover",
     marginTop: 100,
-    borderRadius: 5,
   },
   title: {
     marginTop: 10,
@@ -31,13 +32,12 @@ const useStyle = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     border: "1px dashed #000000",
-    borderRadius: "5px",
   },
   textfield: {
     width: "100%",
     height: "50px",
     padding: "5px",
-    borderRadius: "5px",
+    backgroundColor: "#ffff",
     border: "1px solid #000000",
     fontSize: 16,
   },
@@ -46,7 +46,6 @@ const useStyle = makeStyles((theme) => ({
     fontSize: 16,
     padding: "5px",
     border: "1px solid #000000",
-    borderRadius: "5px",
     "&:focus-visible": {
       outline: "none",
     },
@@ -73,6 +72,8 @@ const initialPost = {
 const CreatePost = () => {
   const classes = useStyle();
 
+  const [loading, setLoading] = useState(false);
+
   const navigation = useNavigate();
 
   const [post, setPost] = useState(initialPost);
@@ -80,13 +81,30 @@ const CreatePost = () => {
   const handleChange = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
 
   const savePost = async () => {
+    setLoading(true);
     await createPost(post);
-    navigation("/admin");
+    setNotify({
+      isOpen: true,
+      message: "Create Successfully",
+      type: "success",
+    });
+    setLoading(false);
+
+    setTimeout(() => {
+      navigation("/admin");
+    }, 1000);
   };
   return (
     <Box className={classes.container}>
+      <Notification notify={notify} setNotify={setNotify} />
+
       <Box className={classes.content}>
         <Box
           style={{
@@ -95,18 +113,10 @@ const CreatePost = () => {
             justifyContent: "space-around",
           }}
         >
-          <Box style={{ width: "100%", marginRight: 3 }}>
+          <Box style={{ width: "100%" }}>
             <h5> Title</h5>
             <InputBase
               name="title"
-              className={classes.textfield}
-              onChange={(e) => handleChange(e)}
-            />
-          </Box>
-          <Box style={{ width: "100%", marginLeft: 3 }}>
-            <h5> Category</h5>
-            <InputBase
-              name="categories"
               className={classes.textfield}
               onChange={(e) => handleChange(e)}
             />
@@ -138,6 +148,9 @@ const CreatePost = () => {
           xs={{ marginTop: "10px" }}
           variant="contained"
           color="primary"
+          endIcon={
+            loading && <ReactBootStrap.Spinner animation="border" size="sm" />
+          }
         >
           Create
         </Button>

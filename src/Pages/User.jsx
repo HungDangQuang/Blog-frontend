@@ -1,9 +1,9 @@
-import HeaderAd from "../components/admin/layout/HeaderAd";
-import AdminPage from "../containers/AdminPage";
-import Navbar from "../components/admin/layout/NarBar";
 import React from "react";
+import HeaderAd from "../components/admin/layout/HeaderAd";
+import UserTable from "../containers/ManagerUser";
+import Navbar from "../components/admin/layout/NarBar";
 import "../style/admin.css";
-export default function Admin() {
+function User() {
   return (
     <>
       <HeaderAd />
@@ -12,9 +12,11 @@ export default function Admin() {
           <Navbar />
         </div>
         <div className="post_list">
-          <AdminPage />
+          <UserTable />
         </div>
       </div>
     </>
   );
 }
+
+export default React.memo(User);

@@ -7,6 +7,13 @@ const loginUser = (params) => {
   });
 };
 
+const loginAdmin = (params) => {
+  return axiosClient("/login", {
+    method: "POST",
+    data: params,
+  });
+};
+
 const registerUser = (params) => {
   return axiosClient("/register", {
     method: "POST",
@@ -14,4 +21,4 @@ const registerUser = (params) => {
   });
 };
 
-export { loginUser, registerUser };
+export { loginUser, registerUser, loginAdmin };

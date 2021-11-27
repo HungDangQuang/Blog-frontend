@@ -1,11 +1,12 @@
 import { Toolbar, makeStyles } from "@material-ui/core";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Categories from "../blog/Category";
-import { IoMdArrowDropdown } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import "../../style/container.css";
 import Avatar from "@mui/material/Avatar";
+import logo from "../../assets/images/logo.png";
+
 const naviStyle = makeStyles({
   component: {
     position: "fixed",
@@ -14,12 +15,15 @@ const naviStyle = makeStyles({
     display: "flex",
     background: "#FFFFFF",
     width: "100%",
+    height: "70px",
+    borderBottom: "1px solid #ccc",
     color: "black",
   },
   container: {
     justifyContent: "center",
-    borderBottom: "1px solid #ccc",
-    height: "50px",
+    background: "#FFFFFF",
+    with: "100%",
+    height: "100%",
     "&  >*": {
       padding: 20,
       color: "black",
@@ -30,10 +34,16 @@ const naviStyle = makeStyles({
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
-    width: 170,
+    width: 90,
+    fontFamily: "Lobster",
+    fontWeight: 1000,
     height: 64,
     marginLeft: 15,
-    marginRight: "209px",
+    marginRight: 307,
+  },
+  colorNar: {
+    fontWeight: 1000,
+    fontFamily: `${"Roboto"}, sans-serif`,
   },
 });
 
@@ -53,13 +63,17 @@ const Navigation = () => {
 
   const info = user.isLogin ? (
     <div className={classes.info}>
-      <Link to="/home">
-        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+      <Link to="/">
+        <Avatar alt="Remy Sharp" src={logo} />
       </Link>
-      Hello! {user.username}
+      {user.username}
     </div>
   ) : (
-    <div className={classes.info}></div>
+    <div className={classes.info}>
+      <Link to="/">
+        <Avatar alt="Remy Sharp" src={logo} />
+      </Link>
+    </div>
   );
 
   const button = user.isLogin ? (
@@ -67,11 +81,12 @@ const Navigation = () => {
       onClick={logout}
       style={{
         background: "unset",
-        border: "none",
+        color: "#000000",
         fontSize: 16,
-        fontFamily: "Roboto",
+        fontFamily: `${"Roboto"}, sans-serif`,
         cursor: "pointer",
         opacity: 0.8,
+        border: "1px solid #ccc",
       }}
     >
       Logout
@@ -80,10 +95,11 @@ const Navigation = () => {
     <Button
       style={{
         background: "unset",
-        border: "none",
         fontSize: 16,
-        fontFamily: "Roboto",
+        fontFamily: `${"Roboto"}, sans-serif`,
         cursor: "pointer",
+        color: "#000000",
+        border: "1px solid #ccc",
         opacity: 0.8,
       }}
       onClick={login}
@@ -96,18 +112,15 @@ const Navigation = () => {
       {info}
       <div>
         <Toolbar className={classes.container}>
-          <Link to="/">HOME</Link>
-          <div className="dropdown">
-            <Link to="" style={{ color: "#000000" }}>
-              CATEGORY
-              <IoMdArrowDropdown />
-            </Link>
-            <div className="dropdown-content">
-              <Categories />
-            </div>
-          </div>
-          <Link to="/about">ABOUT</Link>
-          <Link to="/contact">CONTACT</Link>
+          <Link className={classes.colorNar} to="/">
+            HOME
+          </Link>
+          <Link className={classes.colorNar} to="/about">
+            ABOUT
+          </Link>
+          <Link className={classes.colorNar} to="/contact">
+            CONTACT
+          </Link>
           <div>{button}</div>
         </Toolbar>
       </div>

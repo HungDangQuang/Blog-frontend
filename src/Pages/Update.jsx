@@ -1,8 +1,10 @@
+import React from "react";
 import HeaderAd from "../components/admin/layout/HeaderAd";
 import Update from "../components/create/Update";
 import Navbar from "../components/admin/layout/NarBar";
 import "../style/admin.css";
-export default function Admin() {
+
+function ManagerUpdate() {
   return (
     <>
       <HeaderAd />
@@ -17,3 +19,4 @@ export default function Admin() {
     </>
   );
 }
+export default React.memo(ManagerUpdate);
