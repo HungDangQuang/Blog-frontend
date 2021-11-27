@@ -1,38 +1,44 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { RegisterForm } from "../components/authentication/Register/index";
+import React, { useState } from "react";
+import Register from "../components/authentication/Register/RegisterForm";
 import { registerUser } from "../apis/account";
-import { setLoading, setMessage } from "../redux/reducers/alertSlide";
+import { getToken, getID } from "../apis/authorityToken";
+import Notification from "../components/alertMessage";
 
 const HandleRegister = () => {
-  const { loading } = useSelector((state) => state.message);
-  const dispatch = useDispatch();
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+  const [loading, setLoading] = useState(false);
 
-  const handleRegister = async (values) => {
-    dispatch(setLoading(true));
-
+  const handleLogin = async (values) => {
+    setLoading(true);
     const apiResponse = await registerUser(values);
     const success = apiResponse?.success;
 
+    getToken(apiResponse.accessToken);
+    getID(apiResponse.id);
+
     if (!success) {
-      const payloadSuccess = {
+      setNotify({
+        isOpen: true,
         message: "Register Successfully",
         type: "success",
-      };
-      dispatch(setMessage(payloadSuccess));
-    } else {
-      dispatch(setMessage(apiResponse));
+      });
+      setTimeout(() => {
+        window.location.href = "/admin";
+      }, 2000);
     }
+    setLoading(false);
   };
-  dispatch(setLoading(false));
 
   return (
-    <RegisterForm
-      handleRegister={handleRegister}
-      loading={loading}
-    ></RegisterForm>
+    <>
+      <Notification notify={notify} setNotify={setNotify} />
+
+      <Register handleLogin={handleLogin} loading={loading}></Register>
+    </>
   );
 };
-
-export { HandleRegister };
+export default HandleRegister;

@@ -1,143 +1,110 @@
-import React from "react";
-import { connect } from 'react-redux';
-import { userActions } from '../../../redux/_actions';
-
-import { Icon } from '@iconify/react';
-import eyeFill from '@iconify/icons-eva/eye-fill';
-import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
+import React, { useState } from "react";
+import { useFormik, Form, FormikProvider } from "formik";
+import * as Yup from "yup";
+import { PropTypes } from "prop-types";
+// icon
+import { Icon } from "@iconify/react";
+import eyeFill from "@iconify/icons-eva/eye-fill";
+import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
+import Controls from "../../controls/index";
+import * as ReactBootStrap from "react-bootstrap";
 // material
-import {
-    Stack,
-    TextField,
-    IconButton,
-    InputAdornment,
-    FormGroup,
-    Button
+import { Stack, TextField, IconButton, InputAdornment } from "@mui/material";
 
-} from '@mui/material';
+const Register = ({ handleLogin, loading }) => {
+  const [showPassword, setShowPassword] = useState(false);
 
-class RegisterForm extends React.Component {
-    constructor(props) {
-        super(props);
+  const LoginSchema = Yup.object().shape({
+    username: Yup.string().required("Username is required"),
+    email: Yup.string()
+      .email("Email must be a valid email address")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
 
-        this.state = {
-            user: {
-                username:'',
-                password: '',
-                email: ''
-            },
-            submitted: false,
-            isShowPwd: false
-        };
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: LoginSchema,
+    onSubmit: handleLogin,
+  });
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+  const { errors, touched, handleSubmit, getFieldProps } = formik;
 
-        this.handlePassword = this.handlePassword.bind(this);
-    }
+  const handleShowPassword = () => {
+    setShowPassword((show) => !show);
+  };
 
-    handleChange(event) {
-        const { name, value } = event.target;
-        const { user } = this.state;
-        this.setState({
-            user: {
-                ...user,
-                [name]: value
-            }
-        });
-    }
-    handlePassword() {
-        this.setState(prevState => ({isShowPwd: !prevState.isShowPwd}))
-    }
-    
-    
-    handleSubmit(event) {
-        event.preventDefault();
+  return (
+    <FormikProvider value={formik}>
+      <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+        <Stack spacing={3}>
+          <TextField
+            fullWidth
+            autoComplete="username"
+            type="username"
+            label="Username"
+            {...getFieldProps("username")}
+            error={Boolean(touched.username && errors.username)}
+            helperText={touched.username && errors.username}
+          />
 
-        this.setState({ submitted: true });
-        const { user } = this.state;
-        if (user.username && user.email && user.password) {
-            this.props.register(user);
-        }
-    }
+          <TextField
+            fullWidth
+            autoComplete="email"
+            type="email"
+            label="Email address"
+            {...getFieldProps("email")}
+            error={Boolean(touched.email && errors.email)}
+            helperText={touched.email && errors.email}
+          />
 
-    render() {
-        const isShowPwd = this.state.isShowPwd;
-        return(
-                <FormGroup autoComplete="off" noValidate>
-                    <Stack spacing={3} sx={{mb: 4}}>
-                    <TextField
-                        fullWidth
-                        size="small"
-                        required
-                        autoComplete="username"
-                        type="username"
-                        label="Username"
-                        name="username"
-                        autoFocus
-                        onChange={this.handleChange}
-                    />
+          <TextField
+            fullWidth
+            autoComplete="current-password"
+            type={showPassword ? "text" : "password"}
+            label="Password"
+            {...getFieldProps("password")}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleShowPassword} edge="end">
+                    <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            error={Boolean(touched.password && errors.password)}
+            helperText={touched.password && errors.password}
+          />
+        </Stack>
 
-                    <TextField
-                        fullWidth
-                        size="small"
-                        required
-                        autoComplete="email"
-                        type="email"
-                        label="Email"
-                        name="email"
-                        onChange={this.handleChange}
-                    />
-
-                    <TextField
-                        fullWidth
-                        size="small"
-                        required
-                        label="Password"
-                        name="password"
-                        autoComplete="current-password"
-                        onChange={this.handleChange}
-
-                        type={isShowPwd ? 'text' : 'password'}
-                        InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton onClick={this.handlePassword} edge="end">
-                                <Icon icon={isShowPwd ? eyeFill : eyeOffFill} />
-                                </IconButton>
-                            </InputAdornment>
-                        )
-                        }}
-                    />
-                    </Stack>
-
-                    <Button
-                    fullWidth
-                    size="medium"
-                    type="submit"
-                    variant="contained"
-
-                    sx={{
-                        borderRadius: 3
-                    }}   
-                    onClick={this.handleSubmit}
-                    >
-                        Sign Up
-                    </Button>
-                </FormGroup >
-        );
-    }
-}
-
-
-function mapStateToProps(state) {
-    const { registering } = state.registration;
-    return { registering };
-}
-
-const actionCreators = {
-    register: userActions.register
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ my: 2 }}
+        ></Stack>
+        <Controls.Button
+          fullWidth
+          size="large"
+          type="submit"
+          variant="contained"
+          text="Register"
+          endIcon={
+            loading && <ReactBootStrap.Spinner animation="border" size="sm" />
+          }
+        ></Controls.Button>
+      </Form>
+    </FormikProvider>
+  );
 };
 
-const connectedRegisterForm = connect(mapStateToProps, actionCreators)(RegisterForm);
-export { connectedRegisterForm as RegisterForm };
+Register.propTypes = {
+  handleLogin: PropTypes.func,
+};
+
+export default Register;

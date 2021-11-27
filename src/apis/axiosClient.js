@@ -15,7 +15,7 @@ axiosClient.interceptors.request.use(async (config) => {
       "content-type": "application/json",
     };
   }
-  console.log(config);
+  console.log(token);
   return config;
 });
 

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const alertSlice = createSlice({
+const alterReducer = createSlice({
   name: "message",
   initialState: {
     open: false,
@@ -13,8 +13,8 @@ const alertSlice = createSlice({
       return { ...state, open: true, ...payload };
     },
 
-    setLoading(state, action) {
-      state.loading = action.payload;
+    setLoading(state, { payload }) {
+      state.loading = payload;
     },
 
     closeMessage(state) {
@@ -23,6 +23,6 @@ const alertSlice = createSlice({
   },
 });
 
-const { reducer, actions } = alertSlice;
+const { reducer, actions } = alterReducer;
 export const { setMessage, closeMessage, setLoading } = actions;
 export default reducer;

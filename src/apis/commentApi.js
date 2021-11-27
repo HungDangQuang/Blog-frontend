@@ -3,18 +3,26 @@ import axios from "axios";
 
 const url = "https://youbo.herokuapp.com";
 
-const createComment = async (comment) => {
-  try {
-    return await axios.post(`${url}/comment`, comment);
-  } catch (error) {
-    console.log("Error while calling newComment API ", error);
-  }
+const createComment = (params) => {
+  return axiosClient("/comment", {
+    method: "POST",
+    data: params,
+  });
 };
 
 const getAllComment = () => {
   return axiosClient("/comment", {
     method: "GET",
   });
+};
+
+const getCommentsPost = async (id) => {
+  try {
+    let response = await axios.get(`${url}/comments/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log("Error while calling getComments API ", error);
+  }
 };
 
 const getComments = async (id) => {
@@ -31,4 +39,10 @@ const deleteComment = (params) => {
   });
 };
 
-export { createComment, getAllComment, getComments, deleteComment };
+export {
+  createComment,
+  getAllComment,
+  getComments,
+  deleteComment,
+  getCommentsPost,
+};

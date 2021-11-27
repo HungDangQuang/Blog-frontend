@@ -1,68 +1,112 @@
-import { Box, makeStyles, Typography, Link } from "@material-ui/core";
-import { GitHub, Instagram, Email } from "@material-ui/icons";
-
+import { Box, makeStyles, Typography } from "@material-ui/core";
+import React from "react";
 const useStyles = makeStyles({
-  banner: {
-    backgroundImage: `url(${"https://www.wallpapertip.com/wmimgs/23-236943_us-wallpaper-for-website.jpg"})`,
+  background: {
     width: "100%",
-    height: "50vh",
+    height: "100vh",
     backgroundPosition: "left 0px bottom 0px",
     backgroundSize: "cover",
   },
   wrapper: {
+    display: "flex",
     padding: 20,
-    "& > *": {
-      marginTop: 50,
-    },
   },
   text: {
     color: "#878787",
+  },
+  imgage: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 470,
+    height: 635,
+  },
+  conentAbout: {
+    width: 440,
+    height: 605,
+    background: "white",
+  },
+
+  imgLeft: {
+    width: 356,
+    height: 356,
+    borderRadius: "50%",
+    background:
+      "url(https://images.unsplash.com/photo-1637863685875-bbdf41639d00?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDZ8NnNNVmpUTFNrZVF8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60)",
+    boxShadow: "10px 7px 21px 0 rgb(0 0 0 / 40%)",
+  },
+  wrapContent: {
+    margin: "40px 0px",
+
+    padding: 30,
+  },
+  titleBody: {
+    marginTop: 20,
   },
 });
 
 const About = () => {
   const classes = useStyles();
   return (
-    <Box>
-      <Box className={classes.banner}></Box>
+    <Box className={classes.background}>
       <Box className={classes.wrapper}>
-        <Typography variant="h3">Hi There! I'm Administrator</Typography>
-        <Typography variant="h5" className={classes.text}>
-          I'm a Software Engineer based in India. I've built websites, desktop
-          applications and corporate software.
-          <br />
-          If you are interested, you can view some of my favorite projects here
-          <Box component="span" style={{ marginLeft: 5 }}>
-            <Link
-              href="https://github.com/kunaltyagi9"
-              color="inherit"
-              target="_blank"
-            >
-              <GitHub />
-            </Link>
+        <Box className={classes.imgage}>
+          <Box className={classes.imgLeft}></Box>
+        </Box>
+        <Box className={classes.conentAbout}>
+          <Box className={classes.wrapContent}>
+            <Box className={classes.titleTop}>
+              <Typography
+                variant="h5"
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 1000,
+                  borderBottom: "1px solid #ccc",
+                }}
+              >
+                ABOUT US
+              </Typography>
+            </Box>
+            <Box className={classes.titleBody}>
+              <Typography
+                style={{ fontFamily: "Open Sans", fontWeight: 1000 }}
+                variant="h4"
+              >
+                We create blogs to create meaningful, memorable and iconic
+                benefits.
+              </Typography>
+              <Typography style={{ fontFamily: "Open Sans" }} variant="h6">
+                We always create great blogs for you. You can contact us through
+                the social media page below.
+              </Typography>
+
+              <Box className="socialBar">
+                <ul>
+                  <li>
+                    <a href="https://www.facebook.com/">
+                      <ion-icon name="logo-facebook"> </ion-icon>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagram.com/">
+                      <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.pinterest.com/">
+                      <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/">
+                      <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                  </li>
+                </ul>
+              </Box>
+            </Box>
           </Box>
-        </Typography>
-        <Typography variant="h5" className={classes.text}>
-          Need something built or simply want to have chat? Reach out to me on
-          <Box component="span" style={{ marginLeft: 5 }}>
-            <Link
-              href="https://www.instagram.com/codeforinterview/"
-              color="inherit"
-              target="_blank"
-            >
-              <Instagram />
-            </Link>
-          </Box>
-          or send me an Email
-          <Link
-            href="mailto:codeforinterview@gmail.com?Subject=This is a subject"
-            target="_blank"
-            color="inherit"
-          >
-            <Email />
-          </Link>
-          .
-        </Typography>
+        </Box>
       </Box>
     </Box>
   );

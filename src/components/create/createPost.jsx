@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useSelector } from "react-redux";
-import { categories } from "../../config/data";
-import Autocomplete from "@mui/material/Autocomplete";
+import React, { useState } from "react";
+import Notification from "../alertMessage/index";
 
 import {
   Box,
-  TextField,
   makeStyles,
   TextareaAutosize,
   Button,
   InputBase,
 } from "@material-ui/core";
-
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createPost } from "../../apis/productApi";
+import * as ReactBootStrap from "react-bootstrap";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -27,7 +24,6 @@ const useStyle = makeStyles((theme) => ({
     height: "60vh",
     objectFit: "cover",
     marginTop: 100,
-    borderRadius: 5,
   },
   title: {
     marginTop: 10,
@@ -36,22 +32,20 @@ const useStyle = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     border: "1px dashed #000000",
-    borderRadius: "5px",
   },
   textfield: {
     width: "100%",
     height: "50px",
     padding: "5px",
-    borderRadius: "5px",
+    backgroundColor: "#ffff",
     border: "1px solid #000000",
-    fontSize: 25,
+    fontSize: 16,
   },
   textarea: {
     width: "100%",
     fontSize: 16,
     padding: "5px",
     border: "1px solid #000000",
-    borderRadius: "5px",
     "&:focus-visible": {
       outline: "none",
     },
@@ -71,39 +65,62 @@ const initialPost = {
   description: "",
   picture: "",
   username: "Admin",
-  categories: "Travel",
+  categories: "",
   createdDate: new Date(),
 };
 
 const CreatePost = () => {
   const classes = useStyle();
 
-  const user = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
 
   const navigation = useNavigate();
-  const location = useLocation();
 
   const [post, setPost] = useState(initialPost);
 
   const handleChange = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
 
   const savePost = async () => {
+    setLoading(true);
     await createPost(post);
-    navigation("/admin");
-    console.log(post);
+    setNotify({
+      isOpen: true,
+      message: "Create Successfully",
+      type: "success",
+    });
+    setLoading(false);
+
+    setTimeout(() => {
+      navigation("/admin");
+    }, 1000);
   };
   return (
     <Box className={classes.container}>
+      <Notification notify={notify} setNotify={setNotify} />
+
       <Box className={classes.content}>
-        <Box style={{ width: "100%" }}>
-          <h5> Title</h5>
-          <InputBase
-            name="title"
-            className={classes.textfield}
-            onChange={(e) => handleChange(e)}
-          />
+        <Box
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-around",
+          }}
+        >
+          <Box style={{ width: "100%" }}>
+            <h5> Title</h5>
+            <InputBase
+              name="title"
+              className={classes.textfield}
+              onChange={(e) => handleChange(e)}
+            />
+          </Box>
         </Box>
 
         <Box style={{ width: "100%" }}>
@@ -131,6 +148,9 @@ const CreatePost = () => {
           xs={{ marginTop: "10px" }}
           variant="contained"
           color="primary"
+          endIcon={
+            loading && <ReactBootStrap.Spinner animation="border" size="sm" />
+          }
         >
           Create
         </Button>

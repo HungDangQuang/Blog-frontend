@@ -1,6 +1,7 @@
 import HeaderAd from "../components/admin/layout/HeaderAd";
 import AdminPage from "../containers/AdminPage";
 import Navbar from "../components/admin/layout/NarBar";
+import React from "react";
 import "../style/admin.css";
 export default function Admin() {
   return (

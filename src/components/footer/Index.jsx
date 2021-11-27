@@ -1,10 +1,10 @@
 import "../../style/footer.css";
-import { Link } from "react-router-dom";
+import React from "react";
 const Footer = () => {
   return (
-    <div class="footer-section">
-      <div class="social">
-        <h3>Contact me</h3>
+    <div className="footer-section">
+      <div className="social">
+        <h3 style={{ fontFamily: `${"Roboto"}, sans-serif` }}>Youbo</h3>
         <ul>
           <li>
             <ion-icon name="logo-facebook"> </ion-icon>

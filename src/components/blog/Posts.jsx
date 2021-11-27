@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
@@ -41,6 +42,7 @@ const Posts = () => {
         {currentPosts.length ? (
           currentPosts.map((post) => (
             <Link
+              key={post._id}
               style={{ textDecoration: "none", color: "inherit" }}
               to={`details/${post._id}`}
             >
@@ -63,4 +65,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default React.memo(Posts);
