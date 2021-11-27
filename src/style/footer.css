@@ -28,3 +28,23 @@
 .social ion-icon:hover {
     transform: scale(1.5);
 }
+
+
+.socialBar li{
+    float: left;
+    text-decoration: none;
+    list-style: none;
+    padding: 15px;
+}
+
+.socialBar ion-icon {
+    width: 35px;
+    height: 35px;
+}
+.socialBar ion-icon:hover {
+    transform: scale(1.5);
+}
+.socialBar a ion-icon {
+    width: 35px;
+    height: 35px;
+}

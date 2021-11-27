@@ -5,8 +5,7 @@ import { styled } from "@mui/material/styles";
 import { Card, Link, Container, Typography } from "@mui/material";
 import background from "../assets/images/bg.jpg";
 // components
-import { HandleLogin } from "../containers/HandleLogin";
-
+import HandleLogin from "../containers/HandleLogin";
 // ----------------------------------------------------------------------
 
 const TitleStyle = styled(Typography)(({ theme }) => ({
@@ -44,25 +43,29 @@ const ContainerStyled = styled(Container)(({ theme }) => ({
 
 const Login = () => {
   return (
-    <>
-      <SectionStyle style={{ backgroundImage: `url(${background})` }}>
-        <ContainerStyled maxWidth="xs">
-          <ContentStyle>
-            <TitleStyle variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
-              Search Blog
-            </TitleStyle>
-            <HandleLogin />
+    <SectionStyle
+      style={{
+        width: "100%",
+        backgroundImage: `url(${background})`,
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <ContainerStyled maxWidth="xs">
+        <ContentStyle>
+          <TitleStyle variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
+            Youbo
+          </TitleStyle>
+          <HandleLogin />
 
-            <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-              Don’t have an account?&nbsp;
-              <Link variant="subtitle2" component={RouterLink} to="/register">
-                Sign Up
-              </Link>
-            </Typography>
-          </ContentStyle>
-        </ContainerStyled>
-      </SectionStyle>
-    </>
+          <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+            Don’t have an account?&nbsp;
+            <Link variant="subtitle2" component={RouterLink} to="/register">
+              Sign Up
+            </Link>
+          </Typography>
+        </ContentStyle>
+      </ContainerStyled>
+    </SectionStyle>
   );
 };
 

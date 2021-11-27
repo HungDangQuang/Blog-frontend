@@ -1,5 +1,5 @@
-import { makeStyles, Box, Typography } from "@material-ui/core";
-
+import { makeStyles, Typography } from "@material-ui/core";
+import React from "react";
 const useStyle = makeStyles({
   image: {
     width: "100%",
@@ -25,12 +25,10 @@ const Banner = () => {
   const classes = useStyle();
   return (
     <>
-      <Box className={classes.image}>
-        <Typography style={{ fontFamily: "Josefin Sans" }}>BLOG</Typography>
-        <Typography style={{ borderRadius: 5, padding: 5 }}>
-          Code for Interview
-        </Typography>
-      </Box>
+      <div className={classes.image}>
+        <Typography style={{ fontFamily: "Josefin Sans" }}>YOUBO</Typography>
+        <Typography></Typography>
+      </div>
     </>
   );
 };

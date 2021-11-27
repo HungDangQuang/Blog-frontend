@@ -1,10 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import { Delete, Edit } from "@material-ui/icons";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { getOnePost, deletePost } from "../../apis/productApi";
-
-import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { getOnePost } from "../../apis/productApi";
 import Comments from "./comment/Comments";
 //components
 
@@ -54,18 +51,15 @@ const useStyle = makeStyles((theme) => ({
 
 const ViewDetail = () => {
   const classes = useStyle();
-  const url =
-    "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
-  const navigation = useNavigate();
 
   const [post, setPost] = useState({});
+
   const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
-      let data = await getOnePost(id);
-      setPost(data);
-      console.log(data);
+      let res = await getOnePost(id);
+      setPost(res.data);
     };
     fetchData();
   }, [id]);
@@ -92,4 +86,4 @@ const ViewDetail = () => {
     </Box>
   );
 };
-export default ViewDetail;
+export default React.memo(ViewDetail);

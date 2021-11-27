@@ -5,15 +5,15 @@ import {
   makeStyles,
   TextareaAutosize,
   Button,
-  FormControl,
   InputBase,
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-
+import Notification from "../alertMessage/index";
 import { updatePost, getOnePost } from "../../apis/productApi";
+import * as ReactBootStrap from "react-bootstrap";
 
 const useStyle = makeStyles((theme) => ({
-  textupdate: {
+  container: {
     margin: "100px 95px",
     [theme.breakpoints.down("md")]: {
       margin: 0,
@@ -24,7 +24,6 @@ const useStyle = makeStyles((theme) => ({
     height: "60vh",
     objectFit: "cover",
     marginTop: 100,
-    borderRadius: 5,
   },
   title: {
     marginTop: 10,
@@ -32,21 +31,21 @@ const useStyle = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    border: "1px dashed #000000",
   },
   textfield: {
     width: "100%",
     height: "50px",
     padding: "5px",
-    borderRadius: "5px",
+    backgroundColor: "#ffff",
     border: "1px solid #000000",
-    fontSize: 25,
+    fontSize: 16,
   },
   textarea: {
     width: "100%",
     fontSize: 16,
     padding: "5px",
     border: "1px solid #000000",
-    borderRadius: "5px",
     "&:focus-visible": {
       outline: "none",
     },
@@ -65,32 +64,49 @@ const initialPost = {
   title: "",
   description: "",
   picture: "",
-  username: "",
+  username: "admin",
   categories: "",
   createdDate: new Date(),
 };
 
-const Update = ({ match }) => {
+const Update = () => {
   const classes = useStyle();
   const navigation = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
   const { id } = useParams();
+
   const [post, setPost] = useState(initialPost);
 
   useEffect(() => {
     const fetchData = async () => {
       let data = await getOnePost(id);
-      setPost(data);
+      setPost(data.data);
     };
     fetchData();
   }, [id]);
 
-  console.log(id);
-  console.log(post.title);
+  console.log(localStorage.getItem("blogToken"));
+  console.log(post);
 
   const updateBlogPost = async () => {
+    setLoading(true);
+    setNotify({
+      isOpen: true,
+      message: "Create Successfully",
+      type: "success",
+    });
     await updatePost(id, post);
-
-    navigation("/admin");
+    setLoading(false);
+    setTimeout(() => {
+      navigation("/admin");
+    });
   };
 
   const handleChange = (e) => {
@@ -98,48 +114,62 @@ const Update = ({ match }) => {
   };
 
   return (
-    <Box className={classes.textupdate}>
-      <FormControl className={classes.title}>
-        <Box style={{ width: "100%" }}>
-          <h5> Title</h5>
-          <InputBase
-            onChange={(e) => handleChange(e)}
-            value={post.title}
-            name="title"
-            className={classes.textfield}
-          />
+    <Box className={classes.container}>
+      <Notification notify={notify} setNotify={setNotify} />
+
+      <Box className={classes.content}>
+        <Box
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-around",
+          }}
+        >
+          <Box style={{ width: "100%" }}>
+            <h5> Title</h5>
+            <InputBase
+              value={post.title}
+              name="title"
+              className={classes.textfield}
+              onChange={(e) => handleChange(e)}
+            />
+          </Box>
         </Box>
+
         <Box style={{ width: "100%" }}>
           <h5> ImageURL</h5>
           <InputBase
-            onChange={(e) => handleChange(e)}
-            value={post.picture}
             name="picture"
+            value={post.picture}
             className={classes.textfield}
+            onChange={(e) => handleChange(e)}
           />
         </Box>
-
         <Box style={{ width: "100%" }}>
           <h5>Content</h5>
           <TextareaAutosize
             rowsMin={7}
             space
-            name="discription"
-            value={post.description}
             placeholder="Write something awesome..."
             className={classes.textarea}
+            name="description"
+            value={post.description}
             onChange={(e) => handleChange(e)}
           />
         </Box>
 
         <Button
           onClick={() => updateBlogPost()}
+          xs={{ marginTop: "10px" }}
           variant="contained"
           color="primary"
+          endIcon={
+            loading && <ReactBootStrap.Spinner animation="border" size="sm" />
+          }
         >
           Update
         </Button>
-      </FormControl>
+      </Box>
     </Box>
   );
 };

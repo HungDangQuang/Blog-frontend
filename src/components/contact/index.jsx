@@ -4,7 +4,6 @@ import {
   makeStyles,
   TextareaAutosize,
   Button,
-  FormControl,
   InputBase,
 } from "@material-ui/core";
 
@@ -29,17 +28,15 @@ const useStyle = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     border: "1px dashed #000000",
-    borderRadius: "5px",
   },
   textfield: {
     width: "100%",
     height: "50px",
     padding: "5px",
-    borderRadius: "5px",
     border: "1px solid #000000",
     position: "static",
     backgroundColor: "#ffff",
-    fontSize: 25,
+    fontSize: 20,
     "&:hover": {
       border: "1px solid #000000",
     },
@@ -49,7 +46,6 @@ const useStyle = makeStyles((theme) => ({
     fontSize: 16,
     padding: "5px",
     border: "1px solid #000000",
-    borderRadius: "5px",
     "&:focus-visible": {
       outline: "none",
     },
@@ -72,10 +68,6 @@ const Contact = () => {
       <Box className={classes.content_con}>
         <Box style={{ width: "100%", marginTop: 50, paddingTop: 20 }}>
           <h6> Username</h6>
-          <InputBase name="title" className={classes.textfield} />
-        </Box>
-        <Box style={{ width: "100%", paddingTop: 10 }}>
-          <h6> Phone</h6>
           <InputBase name="title" className={classes.textfield} />
         </Box>
         <Box style={{ width: "100%", paddingTop: 10 }}>

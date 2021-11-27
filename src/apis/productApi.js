@@ -15,19 +15,21 @@ const getAllPosts = () => {
   });
 };
 
-const getOnePost = (id) => {
+const getOnePost = async (id) => {
+  try {
+    return await axios.get(`${url}/post/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updatePost = (id, params) => {
   return axiosClient(`/post/${id}`, {
-    method: "GET",
+    method: "PATCH",
+    data: params,
   });
 };
 
-const updatePost = async (id, post) => {
-  try {
-    return await axios.patch(`${url}/post/${id}`, post);
-  } catch (error) {
-    console.log("Error while calling updatePost API ", error);
-  }
-};
 const deletePost = (params) => {
   return axiosClient(`/post/${params}`, {
     method: "DELETE",

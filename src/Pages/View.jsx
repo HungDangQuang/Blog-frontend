@@ -34,4 +34,4 @@ const View = () => {
     </>
   );
 };
-export default View;
+export default React.memo(View);
