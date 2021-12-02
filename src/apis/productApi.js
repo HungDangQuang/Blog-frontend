@@ -1,9 +1,10 @@
 import axiosClient from "./axiosClient";
 import axios from "axios";
+import axiosAdmin from "./axiosAdmin";
 const url = "https://youbo.herokuapp.com";
 
 const createPost = (params) => {
-  return axiosClient("/post", {
+  return axiosAdmin("/post", {
     method: "POST",
     data: params,
   });
@@ -24,14 +25,14 @@ const getOnePost = async (id) => {
 };
 
 const updatePost = (id, params) => {
-  return axiosClient(`/post/${id}`, {
+  return axiosAdmin(`/post/${id}`, {
     method: "PATCH",
     data: params,
   });
 };
 
 const deletePost = (params) => {
-  return axiosClient(`/post/${params}`, {
+  return axiosAdmin(`/post/${params}`, {
     method: "DELETE",
   });
 };

@@ -1,14 +1,13 @@
-import { Toolbar, makeStyles } from "@material-ui/core";
+import { Toolbar, Button, makeStyles } from "@material-ui/core";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Button } from "@mui/material";
 import "../../style/container.css";
 import Avatar from "@mui/material/Avatar";
 import logo from "../../assets/images/logo.png";
-
+import '../../style/navigation.css'
 const naviStyle = makeStyles({
-  component: {
+  componenthehe: {
     position: "fixed",
     top: 0,
     left: 0,
@@ -108,7 +107,7 @@ const Navigation = () => {
     </Button>
   );
   return (
-    <div className={classes.component}>
+    <div className={classes.componenthehe}>
       {info}
       <div>
         <Toolbar className={classes.container}>

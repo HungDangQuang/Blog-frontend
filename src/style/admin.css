@@ -17,3 +17,54 @@
     min-height: 100%;
     padding-bottom: 80px;
 }
+
+/* Narbar of admin */
+
+.nav_wrap {
+    background: #15171c;
+    height: 200px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.navicon {
+    margin-left: 2.5rem;
+    font-size: 2.5rem;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.SidebarNav {
+    background: rgb(51, 54, 52);
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    z-index: 10px;
+}
+
+.SidebarWrap{
+    margin-top: 100px;
+}
+
+.SidebarWrap ul li {
+    display: flex;
+    justify-content: space-around;
+    list-style: none ;
+    color: aliceblue;
+    font-size: 16px;
+    padding: 10px 76px;
+    margin-bottom: 4px;
+    border-radius: 5px;
+}
+
+.SidebarWrap ul li:hover {
+    background-color: rgb(127, 136, 136);
+}
+
+

@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 });
 
 const initialValue = {
-  name: "",
+  username: "",
   postID: "",
   date: new Date(),
   comment: "",
@@ -64,7 +64,7 @@ const Comments = ({ post }) => {
 
   const handleChange = (e) => {
     setComment({
-      name: user.username,
+      username: user.username,
       postID: post._id,
       date: new Date(),
       comment: e.target.value,

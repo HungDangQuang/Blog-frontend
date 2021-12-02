@@ -44,6 +44,7 @@ const useStyle = makeStyles((theme) => ({
   textarea: {
     width: "100%",
     fontSize: 16,
+    minHeight: 100,
     padding: "5px",
     border: "1px solid #000000",
     "&:focus-visible": {
@@ -65,7 +66,6 @@ const initialPost = {
   description: "",
   picture: "",
   username: "Admin",
-  categories: "",
   createdDate: new Date(),
 };
 
@@ -133,12 +133,13 @@ const CreatePost = () => {
         </Box>
         <Box style={{ width: "100%" }}>
           <h5>Content</h5>
+
           <TextareaAutosize
-            rowsMin={7}
-            space
+            maxRows={5}
+            name="description"
+            aria-label="maximum height"
             placeholder="Write something awesome..."
             className={classes.textarea}
-            name="description"
             onChange={(e) => handleChange(e)}
           />
         </Box>

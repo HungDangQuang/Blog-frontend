@@ -3,10 +3,11 @@ import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import { DeleteOutline } from "@material-ui/icons";
 import EditIcon from "@mui/icons-material/Edit";
-import { Link } from "react-router-dom";
-
+import { Modal, Button } from "react-bootstrap";
+import ReplyForm from "./ReplyForm";
 import {
   Box,
+  Link,
   Table,
   Stack,
   TableRow,
@@ -24,6 +25,12 @@ function CommentTable() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
   const [comments, getComments] = useState([]);
+
+  // Consider show modal
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
@@ -74,9 +81,20 @@ function CommentTable() {
 
   return (
     <Box>
+      <Box
+        style={{
+          backgroundColor: "rgb(235, 234, 230)",
+          display: "flex",
+          marginTop: 110,
+        }}
+      >
+        <Box>
+          <Typography variant="h4"> Manage Comments</Typography>
+        </Box>
+      </Box>
       <TableContainer
         component={Paper}
-        style={{ marginLeft: 20, width: "95%", marginTop: 100 }}
+        style={{ marginLeft: 20, width: "95%", marginTop: 38 }}
       >
         <Notification notify={notify} setNotify={setNotify} />
         <ConfirmDialog
@@ -120,7 +138,7 @@ function CommentTable() {
                     <Stack direction="row" alignItems="center" spacing={2}>
                       <Box align="left"></Box>
                       <Typography variant="subtitle2" noWrap>
-                        {addEllipsis(comment.name, 20)}
+                        {addEllipsis(comment.username, 20)}
                       </Typography>
                     </Stack>
                   </TableCell>
@@ -131,11 +149,13 @@ function CommentTable() {
 
                   <TableCell align="center">
                     <Link
-                      to={`/update/${comments._id}`}
+                      to="#"
+                      onClick={handleShow}
                       style={{ color: "#000000", marginLeft: 10 }}
                     >
                       <EditIcon />
                     </Link>
+
                     <DeleteOutline
                       className="userListDelete"
                       onClick={() => {
@@ -154,6 +174,11 @@ function CommentTable() {
               );
             })}
           </TableBody>
+          <Modal show={show} onHide={handleClose} style={{ marginTop: 100 }}>
+            <Modal.Body>
+              <ReplyForm />
+            </Modal.Body>
+          </Modal>
         </Table>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}

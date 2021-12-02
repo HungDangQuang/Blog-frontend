@@ -1,0 +1,118 @@
+/* Page */
+
+.rootAbout {
+    width: 100%;
+
+}
+
+.getmeabout {
+    background-image: url("../assets/images/about.jpeg");
+    margin: 0 20px;
+    background-color: #F4F7F6;
+  }
+
+
+
+.backgroundAbout {
+    width: 100%;
+    height: 100vh;
+    background-position: left 0px bottom 0px;
+    background-size: cover;
+}
+
+.wrapperAbout {
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    height: 100vh;
+}
+
+.textAbout {
+    color: #878787;
+}
+
+.imageAbout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 470px;
+    height: 587px;
+}
+
+.contentAbout {
+    width: 440px;
+    height: 605;
+    background: white;
+}
+
+.imageLeft {
+    width: 356px;
+    height: 356px;
+    border-radius: 50%;
+    background:url(https://images.unsplash.com/photo-1637863685875-bbdf41639d00?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDZ8NnNNVmpUTFNrZVF8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60);
+    box-shadow: 10px 7px 21px 0 rgb(0 0 0 / 40%)
+}
+
+.wrapConnent{
+    margin: 40px 0px;
+    padding: 30px;
+    margin-top: 100px;
+}
+
+.titleBody {
+    margin-top: 20px;
+}
+
+/* Contact */
+
+.wrap_contact {
+    width: 100%;
+    height: 100vh;
+}
+
+.image_contact {
+    width: 100%;
+    height: 100px;
+    border: 1px solid rgb(219, 23, 23);
+} 
+.imageOriginal{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.info {
+    padding-top: 100px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.avartar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: aqua;
+}
+
+.address_info {
+    display: flex;
+    margin-top: 30px;
+}
+
+.address_info .icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: azure;
+}
+
+.address_info .text {
+    margin-left: 10px;
+}
+

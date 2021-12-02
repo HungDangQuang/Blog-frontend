@@ -1,7 +1,8 @@
+import axiosAdmin from "./axiosAdmin";
 import axiosClient from "./axiosClient";
 
 const getUserInfo = () => {
-  return axiosClient("/user", {
+  return axiosAdmin("/user", {
     method: "GET",
   });
 };
@@ -13,13 +14,13 @@ const getOneUser = (id) => {
 };
 
 const updateUser = (params) => {
-  return axiosClient(`/user/${params}`, {
+  return axiosAdmin(`/user/${params}`, {
     method: "PATCH",
   });
 };
 
 const deleteUser = (params) => {
-  return axiosClient(`/user/${params}`, {
+  return axiosAdmin(`/user/${params}`, {
     method: "DELETE",
   });
 };

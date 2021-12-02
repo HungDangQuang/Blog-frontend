@@ -10,7 +10,7 @@ import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 export default function PrimarySearchAppBar() {
   const handleLogout = () => {
-    localStorage.removeItem("blogToken");
+    localStorage.removeItem("adminToken");
     localStorage.removeItem("blogID");
     window.location.href = "/admin/login";
   };
@@ -35,7 +35,7 @@ export default function PrimarySearchAppBar() {
             component="div"
             sx={{ display: { xs: "none", sm: "block", marginLeft: 10 } }}
           >
-            Admin
+            Administrators
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
 

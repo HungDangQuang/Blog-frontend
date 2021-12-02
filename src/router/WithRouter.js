@@ -15,6 +15,7 @@ import LoginA from "../pages/LoginA.jsx";
 
 import PrivateRoute from "./PrivateRouter";
 const WithRouter = () => {
+  console.log(`Token of admin : ${localStorage.getItem("adminToken")} `);
   return (
     <Routes>
       <Route

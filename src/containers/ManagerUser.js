@@ -78,11 +78,13 @@ function UserTable() {
         style={{
           backgroundColor: "rgb(235, 234, 230)",
           display: "flex",
-          flexDirection: "column",
-          alignItems: "end",
+          justifyContent: "space-between",
           marginTop: 110,
         }}
       >
+        <Box>
+          <Typography variant="h4"> Manage Users</Typography>
+        </Box>
         <Link to="/register">
           <Button
             style={{
@@ -151,7 +153,14 @@ function UserTable() {
                   <TableCell align="center">
                     {addEllipsis(user.email, 20)}
                   </TableCell>
-                  <TableCell align="center"></TableCell>
+                  <TableCell
+                    align="center"
+                    style={{
+                      color: "#0F9D58",
+                    }}
+                  >
+                    Active
+                  </TableCell>
 
                   <TableCell align="center">
                     <DeleteOutline

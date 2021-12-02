@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-
+import axiosAdmin from "./axiosAdmin";
 const loginUser = (params) => {
   return axiosClient("/login", {
     method: "POST",
@@ -8,7 +8,7 @@ const loginUser = (params) => {
 };
 
 const loginAdmin = (params) => {
-  return axiosClient("/login", {
+  return axiosAdmin("/login", {
     method: "POST",
     data: params,
   });

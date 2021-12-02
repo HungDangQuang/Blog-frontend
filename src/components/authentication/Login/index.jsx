@@ -84,11 +84,14 @@ const LoginForm = ({ handleLogin, loading }) => {
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          sx={{ my: 2 }}
+          style={{ margin: "10px" }}
         >
           <FormControlLabel
             control={
               <Checkbox
+                style={{
+                  color: "rgb(1, 156, 233)",
+                }}
                 {...getFieldProps("remember")}
                 checked={values.remember}
               />
@@ -105,7 +108,7 @@ const LoginForm = ({ handleLogin, loading }) => {
           size="large"
           type="submit"
           variant="contained"
-          text="Login"
+          text="LOGIN"
           endIcon={
             loading && <ReactBootStrap.Spinner animation="border" size="sm" />
           }

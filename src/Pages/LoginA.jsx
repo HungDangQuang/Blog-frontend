@@ -1,13 +1,18 @@
 import React from "react";
 // material
 import { styled } from "@mui/material/styles";
-import { Card, Container, Typography } from "@mui/material";
-import background from "../assets/images/bg.jpg";
+import { Card, Container, Typography, Avatar } from "@mui/material";
+import adminIMG from "../assets/images/admin.jpg";
+import logo from "../assets/images/logo.png";
 // components
 import LoginAdmin from "../containers/LoginAdmin";
 // ----------------------------------------------------------------------
 
 const TitleStyle = styled(Typography)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
   fontFamily: ["Chilanka", "cursive"].join(","),
 }));
 
@@ -24,13 +29,13 @@ const ContentStyle = styled("div")(({ theme }) => ({
   minwidth: 330,
   margin: "auto",
   display: "flex",
-  minHeight: "60vh",
+  minHeight: "50vh",
   flexDirection: "column",
   border: "1px solid #ccc",
+  borderRadius: 5,
   backgroundColor: "white",
-  borderRadius: 10,
   justifyContent: "center",
-  padding: theme.spacing(0, 5),
+  padding: theme.spacing(0, 4, 3, 4),
 }));
 
 const ContainerStyled = styled(Container)(({ theme }) => ({
@@ -46,14 +51,15 @@ const LoginA = () => {
       <SectionStyle
         style={{
           width: "100%",
-          backgroundImage: `url(${background})`,
+          backgroundImage: `url(${adminIMG})`,
           backgroundRepeat: "no-repeat",
         }}
       >
         <ContainerStyled maxWidth="xs">
           <ContentStyle>
-            <TitleStyle variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
-              Youbo
+            <TitleStyle variant="h4" align="center" gutterBottom sx={{ mb: 1 }}>
+              <Avatar src={logo} sx={{ width: 60, height: 60 }}></Avatar>
+              <h3>Admin</h3>
             </TitleStyle>
             <LoginAdmin />
           </ContentStyle>

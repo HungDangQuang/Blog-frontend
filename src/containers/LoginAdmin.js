@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Login from "../components/authentication/LoginAdmin/index";
 import { loginAdmin } from "../apis/account";
-import { getToken } from "../apis/authorityToken";
+import { getTokenAdmin } from "../apis/authorityToken";
 import Notification from "../components/alertMessage";
 
 const LoginAdmin = () => {
@@ -19,7 +19,7 @@ const LoginAdmin = () => {
     const success = apiResponse?.success;
     const failed = apiResponse?.failed;
 
-    getToken(apiResponse.accessToken);
+    getTokenAdmin(apiResponse.accessToken);
 
     if (!success) {
       setNotify({

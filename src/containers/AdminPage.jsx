@@ -20,12 +20,13 @@ import {
   TablePagination,
 } from "@mui/material";
 import Notification from "../components/alertMessage/index";
+
 import ConfirmDialog from "../components/alertMessage/ConfirmDialog";
 import { getAllPosts, deletePost } from "../apis/productApi";
 
 function BasicTable() {
   const [posts, getPosts] = useState([]);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(7);
   const [page, setPage] = useState(0);
 
   const [confirmDialog, setConfirmDialog] = useState({
@@ -67,7 +68,7 @@ function BasicTable() {
     setNotify({
       isOpen: true,
       message: "Deleted Successfully",
-      type: "error",
+      type: "success",
     });
   };
 
@@ -81,11 +82,13 @@ function BasicTable() {
           style={{
             backgroundColor: "rgb(235, 234, 230)",
             display: "flex",
-            flexDirection: "column",
-            alignItems: "end",
+            justifyContent: "space-between",
             marginTop: 110,
           }}
         >
+          <Box>
+            <Typography variant="h4"> Manage Posts</Typography>
+          </Box>
           <Link to="/create">
             <Button
               style={{
@@ -101,6 +104,7 @@ function BasicTable() {
             </Button>
           </Link>
         </Box>
+
         <TableContainer
           component={Paper}
           style={{ marginLeft: 20, width: "95%" }}
@@ -185,7 +189,7 @@ function BasicTable() {
             </TableBody>
           </Table>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[7, 14, 26]}
             component="div"
             count={posts.length}
             rowsPerPage={rowsPerPage}

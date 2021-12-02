@@ -31,7 +31,7 @@ const HandleLogin = () => {
       });
       setTimeout(() => {
         window.location.href = "/";
-      }, 2000);
+      }, 1000);
     } else if (!failed) {
       setNotify({
         isOpen: true,

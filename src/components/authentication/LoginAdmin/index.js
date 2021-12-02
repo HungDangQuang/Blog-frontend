@@ -82,7 +82,7 @@ const Login = ({ handleLogin, loading }) => {
           size="large"
           type="submit"
           variant="contained"
-          text="Login"
+          text="LOGIN"
           endIcon={
             loading && <ReactBootStrap.Spinner animation="border" size="sm" />
           }

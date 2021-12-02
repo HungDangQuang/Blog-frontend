@@ -1,57 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { Link, useParams } from "react-router-dom";
 import { getOnePost } from "../../apis/productApi";
 import Comments from "./comment/Comments";
 //components
-
-const useStyle = makeStyles((theme) => ({
-  container: {
-    margin: "50px 100px",
-    [theme.breakpoints.down("md")]: {
-      margin: 0,
-    },
-  },
-  image: {
-    width: "100%",
-    height: "60vh",
-    objectFit: "cover",
-    marginTop: 20,
-    borderRadius: 5,
-  },
-  icons: {
-    float: "right",
-  },
-  icon: {
-    margin: 5,
-    padding: 5,
-    border: "1px solid #878787",
-    borderRadius: 10,
-  },
-  heading: {
-    marginTop: 100,
-    fontSize: 38,
-    fontWeight: 600,
-    textAlign: "center",
-    margin: "70px 0 10px 0",
-  },
-  author: {
-    color: "#878787",
-    display: "flex",
-    margin: "20px 0",
-    [theme.breakpoints.down("sm")]: {
-      display: "block",
-    },
-  },
-  link: {
-    textDecoration: "none",
-    color: "inherit",
-  },
-}));
+import "../../style/container.css";
 
 const ViewDetail = () => {
-  const classes = useStyle();
-
   const [post, setPost] = useState({});
 
   const { id } = useParams();
@@ -65,25 +20,26 @@ const ViewDetail = () => {
   }, [id]);
 
   return (
-    <Box className={classes.container}>
-      <Typography className={classes.heading}>{post.title}</Typography>
+    <div className="containerDetail">
+      <h1 className="headingDetail">{post.title}</h1>
 
-      <img src={post.picture} alt="post" className={classes.image} />
+      <img src={post.picture} alt="post" className="imageDetail" />
 
-      <Box className={classes.author}>
-        <Link to={`/?username=${post.username}?`} className={classes.link}>
-          <Typography>
+      <div className="authorDetail">
+        <Link to={`/?username=${post.username}?`} className="linklink">
+          <h6>
             Author: <span style={{ fontWeight: 600 }}>{post.username}</span>
-          </Typography>
+          </h6>
         </Link>
-        <Typography style={{ marginLeft: "auto" }}>
+        <h6 style={{ marginLeft: "auto" }}>
           {new Date(post.createdDate).toDateString()}
-        </Typography>
-      </Box>
-
-      <Typography className={classes.detail}>{post.description}</Typography>
+        </h6>
+      </div>
+      <div className="detailPost">
+        <Typography>{post.description}</Typography>
+      </div>
       <Comments post={post} />
-    </Box>
+    </div>
   );
 };
 export default React.memo(ViewDetail);

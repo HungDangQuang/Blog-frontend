@@ -31,7 +31,7 @@ const Comment = ({ comment, setToggle }) => {
   return (
     <Box className={classes.component}>
       <Box className={classes.container}>
-        <Typography className={classes.name}>{comment.name}</Typography>
+        <Typography className={classes.name}>{comment.username}</Typography>
         <Typography className={classes.date}>
           {new Date(comment.date).toDateString()}
         </Typography>

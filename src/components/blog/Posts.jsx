@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { getAllPosts } from "../../apis/productApi";
 //components
 import Card from "../card/Index";
 import Pagination from "../../containers/Pagination";
+
 const Posts = () => {
   const [posts, getPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,9 +50,9 @@ const Posts = () => {
             </Link>
           ))
         ) : (
-          <Box style={{ color: "878787", margin: "100px 50px", fontSize: 15 }}>
+          <div style={{ color: "878787", margin: "100px 50px", fontSize: 15 }}>
             No data is available for selected category
-          </Box>
+          </div>
         )}
       </div>
 

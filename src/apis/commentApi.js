@@ -1,6 +1,6 @@
-import axiosClient from "./axiosClient";
+import axiosAdmin from "./axiosAdmin";
 import axios from "axios";
-
+import axiosClient from "./axiosClient";
 const url = "https://youbo.herokuapp.com";
 
 const createComment = (params) => {
@@ -11,7 +11,7 @@ const createComment = (params) => {
 };
 
 const getAllComment = () => {
-  return axiosClient("/comment", {
+  return axiosAdmin("/comment", {
     method: "GET",
   });
 };
@@ -34,7 +34,7 @@ const getComments = async (id) => {
   }
 };
 const deleteComment = (params) => {
-  return axiosClient(`/comment/${params}`, {
+  return axiosAdmin(`/comment/${params}`, {
     method: "DELETE",
   });
 };

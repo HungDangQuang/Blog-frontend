@@ -1,5 +1,7 @@
 import React from "react";
+
 import "../style/container.css";
+
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
 

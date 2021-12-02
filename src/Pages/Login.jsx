@@ -22,16 +22,16 @@ const SectionStyle = styled(Card)(({ theme }) => ({
 }));
 
 const ContentStyle = styled("div")(({ theme }) => ({
-  minwidth: 330,
+  minwidth: 310,
   margin: "auto",
   display: "flex",
-  minHeight: "70vh",
+  minHeight: "62vh",
   flexDirection: "column",
   border: "1px solid #ccc",
   backgroundColor: "white",
-  borderRadius: 10,
+  borderRadius: 5,
   justifyContent: "center",
-  padding: theme.spacing(0, 5),
+  padding: theme.spacing(0, 4),
 }));
 
 const ContainerStyled = styled(Container)(({ theme }) => ({
@@ -52,12 +52,12 @@ const Login = () => {
     >
       <ContainerStyled maxWidth="xs">
         <ContentStyle>
-          <TitleStyle variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
+          <TitleStyle variant="h4" align="center" gutterBottom sx={{ mb: 2 }}>
             Youbo
           </TitleStyle>
           <HandleLogin />
 
-          <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+          <Typography variant="body2" align="center" sx={{ mt: 2 }}>
             Don’t have an account?&nbsp;
             <Link variant="subtitle2" component={RouterLink} to="/register">
               Sign Up

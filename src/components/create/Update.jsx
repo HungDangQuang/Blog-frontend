@@ -92,21 +92,18 @@ const Update = () => {
     fetchData();
   }, [id]);
 
-  console.log(localStorage.getItem("blogToken"));
-  console.log(post);
-
   const updateBlogPost = async () => {
     setLoading(true);
     setNotify({
       isOpen: true,
-      message: "Create Successfully",
+      message: "Post Updated Successfully",
       type: "success",
     });
     await updatePost(id, post);
     setLoading(false);
     setTimeout(() => {
       navigation("/admin");
-    });
+    }, 1000);
   };
 
   const handleChange = (e) => {
@@ -147,9 +144,11 @@ const Update = () => {
         </Box>
         <Box style={{ width: "100%" }}>
           <h5>Content</h5>
+
           <TextareaAutosize
-            rowsMin={7}
+            maxRows={5}
             space
+            aria-label="maximum height"
             placeholder="Write something awesome..."
             className={classes.textarea}
             name="description"

@@ -16,4 +16,20 @@ const getAccessID = () => {
   return id;
 };
 
-export { getAccessToken, getToken, getID, getAccessID };
+const getTokenAdmin = (token) => {
+  return localStorage.setItem("adminToken", JSON.stringify(token));
+};
+
+const getAccessTokenAdmin = () => {
+  const token = JSON.parse(localStorage.getItem("adminToken"));
+  return token;
+};
+
+export {
+  getAccessToken,
+  getToken,
+  getID,
+  getAccessID,
+  getTokenAdmin,
+  getAccessTokenAdmin,
+};
